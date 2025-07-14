@@ -6,14 +6,74 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Bell, ArrowLeft, Check, X, Sun, Moon, RotateCcw, Award } from "lucide-react"
+import { Calendar, Bell, ArrowLeft, Check, X, Sun, Moon, RotateCcw, Award, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useToast } from "@/components/ui/use-toast" // Importar useToast
-import { Toaster } from "@/components/ui/toaster" // Importar Toaster
+import { useToast } from "@/components/ui/use-toast"
+import { Toaster } from "@/components/ui/toaster"
+
+// Importar Dexie e hooks
+import { db, type ReadingEntry, type UserSettings } from "@/lib/db"
+import { useLiveQuery } from "dexie-react-hooks"
 
 // Dados estáticos dos pergaminhos
 const staticScrolls = [
+  {
+    id: 10,
+    title: "Orarei por orientação",
+    preview:
+      "Quem sou eu para saber todos os planos? De hoje em diante, orarei por orientação. Jamais orarei por bens materiais; orarei por direção para alcançar êxito, saúde e felicidade.",
+    image: "/images/perg10.png",
+    fullText: `Orarei por orientação.
+
+Quem sou eu para saber todos os planos?
+
+De hoje em diante, orarei por orientação.
+
+Jamais orarei por bens materiais, nem orarei por êxito, saúde ou felicidade. Em vez disso, orarei por orientação para que me mostre o caminho que devo seguir a fim de alcançá-los.
+
+Orarei por orientação.
+
+Orarei para que as palavras que eu pronunciar sejam corretas. Orarei para que os passos que eu der sejam os certos. Orarei para que as ações que eu realizar tragam êxito e felicidade.
+
+Orarei por orientação.
+
+E como enfrentarei cada dia? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei cada obstáculo? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei cada fracasso? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei cada sucesso? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei meus inimigos? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei meu trabalho? Com oração.
+
+Orarei por orientação.
+
+E como enfrentarei meu destino? Com oração.
+
+Orarei por orientação.
+
+De hoje em diante, recordarei este segredo: a oração é a melhor forma de buscar orientação.
+
+Orarei por orientação.
+
+E deste momento em diante, aprenderei este segredo: a oração é a chave para alcançar o sucesso.
+
+Orarei por orientação e terei êxito.`,
+  },
   {
     id: 1,
     title: "Hoje começo uma nova vida",
@@ -114,7 +174,7 @@ E como enfrentarei cada um que encontrar? De apenas um modo. Em silêncio, e par
 
 Saudarei este dia com amor no coração.
 
-E acima de tudo amarei a mim mesmo, pois quando o fizer, zelosamente, inspecionarei todas as coisas que entraram em meu corpo, minha mente, minha alma e meu coração. Jamais abusarei das solicitações da carne, mas sobretudo, cuidarei de meu corpo com asseio e moderação. Jamais permitirei que minha mente seja atraída para o mal e o desespero, mas sobretudo a elevarei com o conhecimento e a sabedoria das gerações. Jamais permitirei que minha alma se torne complacente e satisfeita, mas haverei de alimentá-la com meditação e oração. Jamais permitirei que meu coração se amesquinhe e padeça, mas compartilhá-lo-ei e ele crescerá e aquecerá a Terra.
+E acima de tudo amarei a mim mesmo, pois quando o fizer, zelosamente, inspecionarei todas as coisas que entraram em meu corpo, minha mente, minha alma e meu coração. Jamais abusarei das solicitações da carne, mas sobretudo, cuidarei de meu corpo com asseio e moderação. Jamais permitirei que minha mente seja atraída para o mal e o desespero, mas sobretudo a elevarei com o conhecimento e a sabedoria das gerações. Jamais permitirei que minha alma se torne complacente e satisfeita, mas compartilhá-lo-ei e ele crescerá e aquecerá a Terra.
 
 Saudarei este dia com amor no coração.
 
@@ -136,7 +196,7 @@ Persistirei até alcançar êxito.
 
 Eu não cheguei a este mundo numa situação de derrota, nem o fracasso corre em minhas veias. Não sou ovelha à espera de que meu pastor me aguilhoe e acaricie, mas um leão e me recuso a falar, andar e dormir como uma ovelha. Não ouvirei aqueles que choram e se queixam, pois tal doença é contagiosa.
 
-Eles que se unam à ovelha. O matadouro do fracasso não é o meu destino.
+Eles que se unjam à ovelha. O matadouro do fracasso não é o meu destino.
 
 Persistirei até alcançar êxito.
 
@@ -192,7 +252,7 @@ Eu sou o maior milagre da natureza.
 
 Embora eu seja, de fato, o maior milagre da natureza, não sou um grão de areia jogado ao vento, para que este me arraste segundo sua vontade. Sou uma maravilha da natureza e a natureza não sabe de derrota.
 
-Desde que há vida, seu objetivo tem sido a vitória sobre todas as adversidades. Sou único e não comecei na pobreza, nem na derrota, nem no fracasso. Desde o sangue de meus antepassados até o meu nascimento, houve uma contínua corrente, cujo fluxo nunca foi interrompido e que correu por incontáveis gerações até chegar a mim.
+Desde que há vida, seu objetivo tem sido a vitória sobre todas as adversidades. Sou único e não comecei na pobreza, nem na derrota, nem no fracasso. Desde o sangue de meus antepassados até o meu nascimento, houve uma contínua corrente, cujo fluxo nunca foi interrompida e que correu por incontáveis gerações até chegar a mim.
 
 De hoje em diante, aproveitarei esta herança de êxito, pois ela é minha. Jamais permitirei que o ontem roube o meu hoje e destruirei o desespero no meu nascimento, nascido do fracasso do passado. Não sou escravo do ontem.
 
@@ -410,7 +470,7 @@ Hoje multiplicarei meu valor em cem vezes.`,
     id: 9,
     title: "Aja agora",
     preview:
-      "Minha vida não é mais do que um piscar de olhos na eternidade. E, contudo, o tempo é suficiente para que eu prove meu valor...",
+      "Minha vida não é mais do que um piscar de olhos na eternidade. E, contudo, o tempo é suficiente para que eu prove meu valor.",
     image: "/images/perg9.png",
     fullText: `Aja agora.
 
@@ -468,96 +528,15 @@ E deste momento em diante, aprenderei este segredo: O fracasso só vence aquele 
 
 Aja agora e terei êxito.`,
   },
-  {
-    id: 10,
-    title: "Orarei por orientação",
-    preview:
-      "Quem sou eu para saber todos os planos? De hoje em diante, orarei por orientação. Jamais orarei por bens materiais; orarei por direção para alcançar êxito, saúde e felicidade.",
-    image: "/images/perg10.png",
-    fullText: `Orarei por orientação.
-
-Quem sou eu para saber todos os planos?
-
-De hoje em diante, orarei por orientação.
-
-Jamais orarei por bens materiais, nem orarei por êxito, saúde ou felicidade. Em vez disso, orarei por orientação para que me mostre o caminho que devo seguir a fim de alcançá-los.
-
-Orarei por orientação.
-
-Orarei para que as palavras que eu pronunciar sejam corretas. Orarei para que os passos que eu der sejam os certos. Orarei para que as ações que eu realizar tragam êxito e felicidade.
-
-Orarei por orientação.
-
-E como enfrentarei cada dia? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei cada obstáculo? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei cada fracasso? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei cada sucesso? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei meus inimigos? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei meu trabalho? Com oração.
-
-Orarei por orientação.
-
-E como enfrentarei meu destino? Com oração.
-
-Orarei por orientação.
-
-De hoje em diante, recordarei este segredo: a oração é a melhor forma de buscar orientação.
-
-Orarei por orientação.
-
-E deste momento em diante, aprenderei este segredo: a oração é a chave para alcançar o sucesso.
-
-Orarei por orientação e terei êxito.`,
-  },
 ]
-
-// Tipos para os dados do usuário
-interface ReadingEntry {
-  morning: number | null // timestamp
-  afternoon: number | null // timestamp
-  evening: number | null // timestamp
-}
-
-interface ScrollUserData {
-  completedDays: number
-  lastReadingDate: string | null // YYYY-MM-DD
-  readings: {
-    [date: string]: ReadingEntry // Key is YYYY-MM-DD
-  }
-}
-
-interface UserAppData {
-  currentScrollId: number
-  scrolls: {
-    [key: number]: ScrollUserData
-  }
-  notificationSettings: {
-    morning: string
-    afternoon: string
-    evening: string
-  }
-}
-
-type Screen = "launch" | "home" | "details" | "reading"
 
 // Funções utilitárias de data e hora
 const formatDateToKey = (date: Date): string => {
-  return date.toISOString().split("T")[0] // YYYY-MM-DD
+  // Garante que a data seja formatada no fuso horário local
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = date.getDate().toString().padStart(2, "0")
+  return `${year}-${month}-${day}` // YYYY-MM-DD
 }
 
 const formatDateToDisplay = (date: Date): string => {
@@ -571,10 +550,10 @@ const formatDateToDisplay = (date: Date): string => {
 }
 
 // Modificar a função getPeriod para retornar strings em português
-const getPeriod = (hour: number): "manhã" | "tarde" | "noite" => {
-  if (hour >= 4 && hour < 12) return "manhã" // 04h00 - 11h59
-  if (hour >= 12 && hour < 19) return "tarde" // 12h00 - 18h59
-  return "noite" // 19h00 - 03h59 (do dia seguinte)
+const getPeriod = (hour: number): "morning" | "afternoon" | "evening" => {
+  if (hour >= 4 && hour < 12) return "morning" // 04h00 - 11h59
+  if (hour >= 12 && hour < 19) return "afternoon" // 12h00 - 18h59
+  return "evening" // 19h00 - 03h59 (do dia seguinte)
 }
 
 const getReadingDay = (timestamp: number): Date => {
@@ -589,23 +568,43 @@ const getReadingDay = (timestamp: number): Date => {
   return date
 }
 
-const isDayCompleted = (entry: ReadingEntry): boolean => {
-  return entry.morning !== null && entry.afternoon !== null && entry.evening !== null
+// Funções para calcular dias completos e consecutivos (agora baseadas em ReadingEntry[] e não no objeto aninhado)
+const isDayCompleted = (dailyReadings: ReadingEntry[]): boolean => {
+  const periods = dailyReadings.map((r) => r.period)
+  return periods.includes("morning") && periods.includes("afternoon") && periods.includes("evening")
 }
 
-const calculateCompletedDays = (readings: { [date: string]: ReadingEntry }): number => {
+const calculateCompletedDays = (allReadings: ReadingEntry[], scrollId: number): number => {
+  const readingsForScroll = allReadings.filter((r) => r.scrollId === scrollId)
+  const readingsByDate: { [date: string]: ReadingEntry[] } = {}
+  readingsForScroll.forEach((r) => {
+    if (!readingsByDate[r.dateKey]) {
+      readingsByDate[r.dateKey] = []
+    }
+    readingsByDate[r.dateKey].push(r)
+  })
+
   let count = 0
-  for (const dateKey in readings) {
-    if (isDayCompleted(readings[dateKey])) {
+  for (const dateKey in readingsByDate) {
+    if (isDayCompleted(readingsByDate[dateKey])) {
       count++
     }
   }
   return count
 }
 
-const calculateConsecutiveDays = (readings: { [date: string]: ReadingEntry }): number => {
-  const sortedDates = Object.keys(readings)
-    .filter((dateKey) => isDayCompleted(readings[dateKey]))
+const calculateConsecutiveDays = (allReadings: ReadingEntry[], scrollId: number): number => {
+  const readingsForScroll = allReadings.filter((r) => r.scrollId === scrollId)
+  const readingsByDate: { [date: string]: ReadingEntry[] } = {}
+  readingsForScroll.forEach((r) => {
+    if (!readingsByDate[r.dateKey]) {
+      readingsByDate[r.dateKey] = []
+    }
+    readingsByDate[r.dateKey].push(r)
+  })
+
+  const sortedDates = Object.keys(readingsByDate)
+    .filter((dateKey) => isDayCompleted(readingsByDate[dateKey]))
     .sort() // Sorts YYYY-MM-DD strings correctly
 
   if (sortedDates.length === 0) return 0
@@ -709,95 +708,83 @@ const getMotivationalMessage = (completedDays: number, consecutiveDays: number, 
   }
 }
 
-export default function UMTYApp() {
+type Screen = "launch" | "home" | "details" | "reading"
+
+export default function UCAApp() {
   const [currentScreen, setCurrentScreen] = useState<Screen>("launch")
   const [selectedScrollId, setSelectedScrollId] = useState<number | null>(null)
   const [agreedToTerms, setAgreedToTerms] = useState(false)
-  const { toast } = useToast() // Inicializar useToast
+  const { toast } = useToast()
 
-  const [userAppData, setUserAppData] = useState<UserAppData>(() => {
-    // Initial state from localStorage or defaults
-    if (typeof window !== "undefined") {
-      const savedData = localStorage.getItem("umtyAppData")
-      if (savedData) {
-        return JSON.parse(savedData)
-      }
-    }
-    // Default initial state
-    const initialScrollsData: { [key: number]: ScrollUserData } = {}
-    staticScrolls.forEach((scroll) => {
-      initialScrollsData[scroll.id] = {
-        completedDays: 0,
-        lastReadingDate: null,
-        readings: {},
-      }
-    })
-    return {
-      currentScrollId: 1,
-      scrolls: initialScrollsData,
-      notificationSettings: {
-        morning: "07h59",
-        afternoon: "11h59",
-        evening: "20h59",
-      },
-    }
-  })
+  // Usar useLiveQuery para obter dados do Dexie
+  const userSettings = useLiveQuery(() => db.userSettings.get("settings"), [])
+  const allScrollProgress = useLiveQuery(() => db.scrollProgress.toArray(), [])
+  const allReadings = useLiveQuery(() => db.readings.toArray(), [])
 
-  // Save data to localStorage whenever userAppData changes
+  // Efeito para inicializar o banco de dados se estiver vazio
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("umtyAppData", JSON.stringify(userAppData))
+    const initializeDb = async () => {
+      // Upsert da entry de configurações
+      await db.userSettings.put({
+        id: "settings",
+        currentScrollId: 1,
+        notificationSettings: {
+          morning: "07h59",
+          afternoon: "11h59",
+          evening: "20h59",
+        },
+      })
+
+      // Upsert do progresso de cada pergaminho
+      await db.transaction("rw", db.scrollProgress, async () => {
+        for (const scroll of staticScrolls) {
+          await db.scrollProgress.put({
+            scrollId: scroll.id,
+            completedDays: 0,
+            lastReadingDate: null,
+          })
+        }
+      })
     }
-  }, [userAppData])
+    initializeDb()
+  }, [])
 
-  const currentScrollData = staticScrolls.find((s) => s.id === userAppData.currentScrollId)
-  const currentUserScrollData = userAppData.scrolls[userAppData.currentScrollId] || {
-    completedDays: 0,
-    lastReadingDate: null,
-    readings: {},
-  }
-
-  const totalProgress = Math.round((currentUserScrollData.completedDays / 30) * 100)
-  const remainingDays = 30 - currentUserScrollData.completedDays
-
-  const confirmReading = useCallback(() => {
+  const confirmReading = useCallback(async () => {
     const now = new Date()
     const readingTimestamp = now.getTime()
     const readingDay = getReadingDay(readingTimestamp)
     const readingDayKey = formatDateToKey(readingDay)
     const currentHour = now.getHours()
-    const period = getPeriod(currentHour) // Agora retorna "manhã", "tarde" ou "noite"
+    const period = getPeriod(currentHour)
 
-    setUserAppData((prevData) => {
-      const newData = { ...prevData }
-      const currentScrollId = newData.currentScrollId
-      const scrollData = newData.scrolls[currentScrollId]
+    const currentScrollId = userSettings?.currentScrollId || 1
 
-      // Initialize day entry if it doesn't exist
-      if (!scrollData.readings[readingDayKey]) {
-        scrollData.readings[readingDayKey] = { morning: null, afternoon: null, evening: null }
-      }
+    try {
+      // Criar um ID composto para a entrada de leitura
+      const readingId = `${currentScrollId}-${readingDayKey}-${period}`
 
-      // Update the reading timestamp for the period
-      // Note: The keys in `readings` object (morning, afternoon, evening) are still in English
-      // because they represent the internal data structure. The display string `period` is in Portuguese.
-      if (period === "manhã") {
-        scrollData.readings[readingDayKey].morning = readingTimestamp
-      } else if (period === "tarde") {
-        scrollData.readings[readingDayKey].afternoon = readingTimestamp
-      } else if (period === "noite") {
-        scrollData.readings[readingDayKey].evening = readingTimestamp
-      }
+      // Adicionar ou atualizar a entrada de leitura
+      await db.readings.put({
+        id: readingId,
+        scrollId: currentScrollId,
+        dateKey: readingDayKey,
+        period: period,
+        timestamp: readingTimestamp,
+      })
 
-      // Update last reading date
-      scrollData.lastReadingDate = readingDayKey
+      // Recalcular completedDays e lastReadingDate para o scroll atual
+      const updatedReadingsForScroll = await db.readings.where({ scrollId: currentScrollId }).toArray()
+      const newCompletedDays = calculateCompletedDays(updatedReadingsForScroll, currentScrollId)
+      const newLastReadingDate = readingDayKey
 
-      // Recalculate completed days
-      scrollData.completedDays = calculateCompletedDays(scrollData.readings)
+      await db.scrollProgress.update(currentScrollId, {
+        completedDays: newCompletedDays,
+        lastReadingDate: newLastReadingDate,
+      })
 
-      // Check if current scroll is completed (30 days) and advance to next
-      if (scrollData.completedDays >= 30 && currentScrollId < staticScrolls.length) {
-        newData.currentScrollId = currentScrollId + 1
+      // Verificar se o pergaminho atual foi concluído (30 dias) e avançar para o próximo
+      if (newCompletedDays >= 30 && currentScrollId < staticScrolls.length) {
+        await db.userSettings.update("settings", { currentScrollId: currentScrollId + 1 })
         toast({
           title: `Pergaminho ${currentScrollId} Concluído!`,
           description: `Parabéns! Você completou 30 dias de leitura. Próximo: Pergaminho ${currentScrollId + 1}.`,
@@ -805,56 +792,110 @@ export default function UMTYApp() {
       } else {
         toast({
           title: "Leitura Confirmada!",
-          description: `Sua leitura da ${period} foi registrada para o dia ${formatDateToDisplay(readingDay)}.`,
+          description: `Sua leitura da ${
+            period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"
+          } foi registrada para o dia ${formatDateToDisplay(readingDay)}.`,
         })
       }
-
-      return newData
-    })
+    } catch (error) {
+      console.error("Erro ao confirmar leitura:", error)
+      toast({
+        title: "Erro ao Salvar Leitura",
+        description: "Não foi possível registrar sua leitura. Tente novamente.",
+        variant: "destructive",
+      })
+    }
 
     setAgreedToTerms(false) // Reset toggle after confirmation
     setCurrentScreen("home") // Go back to home after confirming
-  }, [setUserAppData, toast])
+    window.scrollTo(0, 0) // Scroll to the top of the page
+  }, [userSettings, toast])
 
-  const handleNotificationSave = useCallback(() => {
-    setUserAppData((prevData) => ({
-      ...prevData,
-      notificationSettings: prevData.notificationSettings, // Already updated by individual button clicks
-    }))
-    toast({
-      title: "Configurações Salvas!",
-      description: "Suas preferências de notificação foram atualizadas.",
-    })
-  }, [setUserAppData, toast])
+  // handleNotificationSave agora aceita os novos settings como argumento
+  const handleNotificationSave = useCallback(
+    async (newSettings: UserSettings["notificationSettings"]) => {
+      if (!userSettings) return
+      try {
+        await db.userSettings.update("settings", {
+          notificationSettings: newSettings, // Usa os novos settings passados
+        })
+        toast({
+          title: "Configurações Salvas!",
+          description: "Suas preferências de notificação foram atualizadas.",
+        })
+      } catch (error) {
+        console.error("Erro ao salvar notificações:", error)
+        toast({
+          title: "Erro ao Salvar",
+          description: "Não foi possível salvar as configurações de notificação.",
+          variant: "destructive",
+        })
+      }
+    },
+    [userSettings, toast],
+  ) // userSettings ainda é uma dependência para acessar o ID 'settings'
 
-  const handleResetApp = useCallback(() => {
+  const handleResetApp = useCallback(async () => {
     if (confirm("Tem certeza que deseja recomeçar? Todos os seus registros de leitura serão apagados.")) {
-      const initialScrollsData: { [key: number]: ScrollUserData } = {}
-      staticScrolls.forEach((scroll) => {
-        initialScrollsData[scroll.id] = {
-          completedDays: 0,
-          lastReadingDate: null,
-          readings: {},
-        }
-      })
-      setUserAppData({
-        currentScrollId: 1,
-        scrolls: initialScrollsData,
-        notificationSettings: {
-          morning: "07h59",
-          afternoon: "11h59",
-          evening: "20h59",
-        },
-      })
-      setCurrentScreen("home")
-      toast({
-        title: "Aplicativo Reiniciado!",
-        description: "Todos os seus registros foram apagados. Comece sua jornada novamente!",
-      })
-    }
-  }, [setUserAppData, toast])
+      try {
+        await db.readings.clear()
+        await db.scrollProgress.clear()
+        await db.userSettings.clear()
 
-  const allScrollsCompleted = Object.values(userAppData.scrolls).every((s) => s.completedDays >= 30)
+        // Re-initialize settings and scroll progress
+        await db.userSettings.add({
+          id: "settings",
+          currentScrollId: 1,
+          notificationSettings: {
+            morning: "07h59",
+            afternoon: "11h59",
+            evening: "20h59",
+          },
+        })
+        for (const scroll of staticScrolls) {
+          await db.scrollProgress.add({
+            scrollId: scroll.id,
+            completedDays: 0,
+            lastReadingDate: null,
+          })
+        }
+
+        setCurrentScreen("home")
+        toast({
+          title: "Aplicativo Reiniciado!",
+          description: "Todos os seus registros foram apagados. Comece sua jornada novamente!",
+        })
+      } catch (error) {
+        console.error("Erro ao reiniciar aplicativo:", error)
+        toast({
+          title: "Erro ao Reiniciar",
+          description: "Não foi possível reiniciar o aplicativo.",
+          variant: "destructive",
+        })
+      }
+    }
+  }, [toast])
+
+  // Carregando estado enquanto os dados do Dexie são buscados
+  if (userSettings === undefined || allScrollProgress === undefined || allReadings === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-lg text-gray-600">Carregando...</p>
+      </div>
+    )
+  }
+
+  const currentScrollId = userSettings?.currentScrollId || 1
+  const currentUserScrollProgress = allScrollProgress?.find((s) => s.scrollId === currentScrollId) || {
+    scrollId: currentScrollId,
+    completedDays: 0,
+    lastReadingDate: null,
+  }
+
+  const totalProgress = Math.round((currentUserScrollProgress.completedDays / 30) * 100)
+  const remainingDays = 30 - currentUserScrollProgress.completedDays
+
+  const allScrollsCompleted = allScrollProgress?.every((s) => s.completedDays >= 30) || false
 
   const LaunchScreen = () => (
     <div className="min-h-screen bg-gradient-to-b from-blue-600 to-purple-700 flex flex-col text-white">
@@ -863,7 +904,7 @@ export default function UMTYApp() {
         <div className="w-full max-w-sm">
           <Image
             src="/images/team-photo.png"
-            alt="Team UMTY"
+            alt="Team UCA"
             width={400}
             height={300}
             className="w-full h-auto rounded-lg shadow-lg"
@@ -894,23 +935,39 @@ export default function UMTYApp() {
   const HomeScreen = () => {
     const sortedScrolls = [...staticScrolls].sort((a, b) => a.id - b.id)
 
-    const currentScrollInfo = userAppData.scrolls[userAppData.currentScrollId]
-    const currentScrollCompletedDays = currentScrollInfo?.completedDays || 0
+    const currentScrollProgressData = allScrollProgress?.find((s) => s.scrollId === currentScrollId) || {
+      scrollId: currentScrollId,
+      completedDays: 0,
+      lastReadingDate: null,
+    }
+
+    const currentScrollCompletedDays = currentScrollProgressData.completedDays
     const currentScrollTotalDays = 30 // Fixed for all scrolls
     const currentScrollRemainingDays = currentScrollTotalDays - currentScrollCompletedDays
     const currentScrollProgress = Math.round((currentScrollCompletedDays / currentScrollTotalDays) * 100)
 
-    const currentScrollConsecutiveDays = calculateConsecutiveDays(currentScrollInfo?.readings || {})
+    const currentScrollReadings = allReadings?.filter((r) => r.scrollId === currentScrollId) || []
+    const currentScrollConsecutiveDays = calculateConsecutiveDays(currentScrollReadings, currentScrollId)
     const motivationalData = getMotivationalMessage(
       currentScrollCompletedDays,
       currentScrollConsecutiveDays,
       currentScrollTotalDays,
     )
 
+    const lastReadingDisplay = currentScrollProgressData?.lastReadingDate
+      ? formatDateToDisplay(
+          new Date(
+            Number.parseInt(currentScrollProgressData.lastReadingDate.substring(0, 4)), // Ano
+            Number.parseInt(currentScrollProgressData.lastReadingDate.substring(5, 7)) - 1, // Mês (0-indexado)
+            Number.parseInt(currentScrollProgressData.lastReadingDate.substring(8, 10)), // Dia
+          ),
+        )
+      : "não iniciada"
+
     return (
       <div className="min-h-screen bg-gray-50">
         <div className="bg-white p-6 shadow-sm">
-          <h1 className="text-xl font-bold mb-4">Você está no Pergaminho {userAppData.currentScrollId}</h1>
+          <h1 className="text-xl font-bold mb-4">Você está no Pergaminho {currentScrollId}</h1>
 
           <Card
             className="mb-4 cursor-pointer hover:shadow-md transition-shadow"
@@ -957,9 +1014,19 @@ export default function UMTYApp() {
 
         <div className="p-4 space-y-4">
           {sortedScrolls.map((scroll) => {
-            const scrollUserData = userAppData.scrolls[scroll.id]
+            const scrollUserData = allScrollProgress?.find((s) => s.scrollId === scroll.id) || {
+              scrollId: scroll.id,
+              completedDays: 0,
+              lastReadingDate: null,
+            }
             const lastReadingDisplay = scrollUserData?.lastReadingDate
-              ? formatDateToDisplay(new Date(scrollUserData.lastReadingDate))
+              ? formatDateToDisplay(
+                  new Date(
+                    Number.parseInt(scrollUserData.lastReadingDate.substring(0, 4)),
+                    Number.parseInt(scrollUserData.lastReadingDate.substring(5, 7)) - 1,
+                    Number.parseInt(scrollUserData.lastReadingDate.substring(8, 10)),
+                  ),
+                )
               : "não iniciada"
             const scrollCompletedDays = scrollUserData?.completedDays || 0
             const scrollProgressValue = (scrollCompletedDays / 30) * 100
@@ -1019,50 +1086,138 @@ export default function UMTYApp() {
     )
   }
 
-  const DetailsScreen = () => {
-    const currentScrollDetails = staticScrolls.find((s) => s.id === userAppData.currentScrollId)
-    const currentUserScrollDetailsData = userAppData.scrolls[userAppData.currentScrollId] || {
+  // Componente DetailsScreen agora recebe props para gerenciar as notificações
+  const DetailsScreen = ({
+    initialNotificationSettings,
+    onSaveNotifications,
+  }: {
+    initialNotificationSettings: UserSettings["notificationSettings"]
+    onSaveNotifications: (newSettings: UserSettings["notificationSettings"]) => void
+  }) => {
+    const [currentNotificationSettings, setCurrentNotificationSettings] = useState(initialNotificationSettings)
+
+    // Sincroniza o estado local com as props quando elas mudam (ex: após um reset)
+    useEffect(() => {
+      setCurrentNotificationSettings(initialNotificationSettings)
+    }, [initialNotificationSettings])
+
+    const currentScrollDetails = staticScrolls.find((s) => s.id === currentScrollId)
+    const currentUserScrollProgressData = allScrollProgress?.find((s) => s.scrollId === currentScrollId) || {
+      scrollId: currentScrollId,
       completedDays: 0,
       lastReadingDate: null,
-      readings: {},
     }
 
-    // Prepare calendar data for the current scroll
-    const calendarEntries = Object.keys(currentUserScrollDetailsData.readings)
-      .map((dateKey) => {
-        const readings = currentUserScrollDetailsData.readings[dateKey]
-        const date = new Date(dateKey)
-        const formattedReadings: string[] = []
-        if (readings.morning)
-          formattedReadings.push(
-            new Date(readings.morning).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-          )
-        if (readings.afternoon)
-          formattedReadings.push(
-            new Date(readings.afternoon).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-          )
-        if (readings.evening)
-          formattedReadings.push(
-            new Date(readings.evening).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-          )
+    // Fetch all readings for the current scroll
+    const readingsForCurrentScroll = allReadings?.filter((r) => r.scrollId === currentScrollId) || []
 
-        const missed: string[] = []
-        if (readings.morning === null) missed.push("manhã")
-        if (readings.afternoon === null) missed.push("tarde")
-        if (readings.evening === null) missed.push("noite")
+    // Group readings by dateKey
+    const readingsByDate: { [date: string]: ReadingEntry[] } = {}
+    readingsForCurrentScroll.forEach((r) => {
+      if (!readingsByDate[r.dateKey]) {
+        readingsByDate[r.dateKey] = []
+      }
+      readingsByDate[r.dateKey].push(r)
+    })
+
+    // Prepare calendar data for the current scroll
+    const calendarEntries = Object.keys(readingsByDate)
+      .map((dateKey) => {
+        const dailyReadings = readingsByDate[dateKey]
+        const [entryYear, entryMonth, entryDay] = dateKey.split("-").map(Number)
+        const date = new Date(entryYear, entryMonth - 1, entryDay) // Local date for this entry
+        const now = new Date()
+        const entryDate = new Date(entryYear, entryMonth - 1, entryDay) // Re-create for consistent time handling
+
+        const allPeriods: ("morning" | "afternoon" | "evening")[] = ["morning", "afternoon", "evening"]
+        const periodStatuses: {
+          periodName: string
+          status: "completed" | "missed" | "attention"
+          time?: string
+        }[] = []
+
+        // Sort daily readings by timestamp to ensure consistent order (morning, afternoon, evening)
+        dailyReadings.sort((a, b) => a.timestamp - b.timestamp)
+
+        allPeriods.forEach((period) => {
+          const reading = dailyReadings.find((r) => r.period === period)
+          const periodDisplayName = period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"
+
+          if (reading) {
+            periodStatuses.push({
+              periodName: periodDisplayName,
+              status: "completed",
+              time: new Date(reading.timestamp).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+            })
+          } else {
+            // No reading for this period
+            let periodStartTime: Date
+            let periodEndTime: Date
+
+            if (period === "morning") {
+              periodStartTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate(), 4, 0, 0)
+              periodEndTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate(), 12, 0, 0)
+            } else if (period === "afternoon") {
+              periodStartTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate(), 12, 0, 0)
+              periodEndTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate(), 19, 0, 0)
+            } else {
+              // evening
+              periodStartTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate(), 19, 0, 0)
+              periodEndTime = new Date(entryDate.getFullYear(), entryDate.getMonth(), entryDate.getDate() + 1, 4, 0, 0)
+            }
+
+            const nowTime = now.getTime()
+            const periodStartTimeMs = periodStartTime.getTime()
+            const periodEndTimeMs = periodEndTime.getTime()
+
+            // Check if 'now' falls within the active window for this period of this specific 'entryDate'
+            if (nowTime >= periodStartTimeMs && nowTime < periodEndTimeMs) {
+              periodStatuses.push({
+                periodName: periodDisplayName,
+                status: "attention",
+              })
+            } else if (nowTime >= periodEndTimeMs) {
+              // The period has already passed
+              periodStatuses.push({
+                periodName: periodDisplayName,
+                status: "missed",
+              })
+            } else {
+              // The period is in the future (relative to 'now') or it's a past date and the period is in the future
+              // For a past date, if not completed, it's missed. For today, if not yet started, it's attention.
+              // This logic needs to be careful. If entryDate is in the past, and period is not completed, it's missed.
+              // If entryDate is today, and period is in the future, it's attention.
+              const todayKey = formatDateToKey(now)
+              if (dateKey === todayKey) {
+                periodStatuses.push({
+                  periodName: periodDisplayName,
+                  status: "attention",
+                })
+              } else {
+                periodStatuses.push({
+                  periodName: periodDisplayName,
+                  status: "missed",
+                })
+              }
+            }
+          }
+        })
 
         return {
           date: formatDateToDisplay(date),
-          status: isDayCompleted(readings) ? "completed" : "partial",
-          readings: formattedReadings,
-          missed: missed.length > 0 ? missed : undefined,
-          bonus: isDayCompleted(readings), // Assuming bonus means completed 3x
+          dateKey: dateKey, // Adiciona dateKey para ordenação
+          status: isDayCompleted(dailyReadings) ? "completed" : "partial",
+          periodStatuses: periodStatuses, // Nova array com status para cada período
+          bonus: isDayCompleted(dailyReadings), // Assumindo que bônus significa 3x completo
         }
       })
-      .sort((a, b) => new Date(b.date.split(" ").slice(1).join(" ")) - new Date(a.date.split(" ").slice(1).join(" "))) // Descending order
+      .filter((day) => day.periodStatuses.some((ps) => ps.status === "completed" || ps.status === "attention")) // Filtra para mostrar apenas dias com pelo menos 1 marcação ou atenção
+      .sort(
+        (a, b) => new Date(b.dateKey).getTime() - new Date(a.dateKey).getTime(), // Ordena por dateKey (descrescente)
+      )
 
-    const currentScrollCompletedDays = currentUserScrollDetailsData.completedDays
-    const currentScrollConsecutiveDays = calculateConsecutiveDays(currentUserScrollDetailsData.readings)
+    const currentScrollCompletedDays = currentUserScrollProgressData.completedDays
+    const currentScrollConsecutiveDays = calculateConsecutiveDays(readingsForCurrentScroll, currentScrollId)
     const motivationalData = getMotivationalMessage(currentScrollCompletedDays, currentScrollConsecutiveDays, 30)
 
     return (
@@ -1137,17 +1292,19 @@ export default function UMTYApp() {
                     </div>
 
                     <div className="flex gap-4">
-                      {day.readings.map((reading, idx) => (
+                      {day.periodStatuses.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-1">
-                          {day.missed?.includes(reading) ? (
+                          {item.status === "completed" ? (
+                            <Check className="w-4 h-4 text-green-500" />
+                          ) : item.status === "missed" ? (
                             <X className="w-4 h-4 text-red-500" />
                           ) : (
-                            <Check className="w-4 h-4 text-green-500" />
+                            <AlertTriangle className="w-4 h-4 text-yellow-500" /> // Ícone para "atenção"
                           )}
                           <span
-                            className={`text-sm ${day.missed?.includes(reading) ? "text-red-500" : "text-green-600"}`}
+                            className={`text-sm ${item.status === "missed" ? "text-red-500" : item.status === "attention" ? "text-yellow-600" : "text-green-600"}`}
                           >
-                            {reading}
+                            {item.time || item.periodName}
                           </span>
                         </div>
                       ))}
@@ -1181,15 +1338,12 @@ export default function UMTYApp() {
                       {["07h59", "08h59", "09h59"].map((time) => (
                         <Button
                           key={time}
-                          variant={userAppData.notificationSettings.morning === time ? "default" : "outline"}
+                          variant={currentNotificationSettings.morning === time ? "default" : "outline"}
                           size="sm"
                           onClick={() => {
-                            setUserAppData((prev) => ({
-                              ...prev,
-                              notificationSettings: { ...prev.notificationSettings, morning: time },
-                            }))
+                            setCurrentNotificationSettings((prev) => ({ ...prev, morning: time }))
                           }}
-                          className={userAppData.notificationSettings.morning === time ? "bg-blue-500" : ""}
+                          className={currentNotificationSettings.morning === time ? "bg-blue-500" : ""}
                         >
                           {time}
                         </Button>
@@ -1204,15 +1358,12 @@ export default function UMTYApp() {
                       {["11h59", "12h59", "13h59"].map((time) => (
                         <Button
                           key={time}
-                          variant={userAppData.notificationSettings.afternoon === time ? "default" : "outline"}
+                          variant={currentNotificationSettings.afternoon === time ? "default" : "outline"}
                           size="sm"
                           onClick={() => {
-                            setUserAppData((prev) => ({
-                              ...prev,
-                              notificationSettings: { ...prev.notificationSettings, afternoon: time },
-                            }))
+                            setCurrentNotificationSettings((prev) => ({ ...prev, afternoon: time }))
                           }}
-                          className={userAppData.notificationSettings.afternoon === time ? "bg-blue-500" : ""}
+                          className={currentNotificationSettings.afternoon === time ? "bg-blue-500" : ""}
                         >
                           {time}
                         </Button>
@@ -1227,15 +1378,12 @@ export default function UMTYApp() {
                       {["20h59", "21h59", "22h59"].map((time) => (
                         <Button
                           key={time}
-                          variant={userAppData.notificationSettings.evening === time ? "default" : "outline"}
+                          variant={currentNotificationSettings.evening === time ? "default" : "outline"}
                           size="sm"
                           onClick={() => {
-                            setUserAppData((prev) => ({
-                              ...prev,
-                              notificationSettings: { ...prev.notificationSettings, evening: time },
-                            }))
+                            setCurrentNotificationSettings((prev) => ({ ...prev, evening: time }))
                           }}
-                          className={userAppData.notificationSettings.evening === time ? "bg-blue-500" : ""}
+                          className={currentNotificationSettings.evening === time ? "bg-blue-500" : ""}
                         >
                           {time}
                         </Button>
@@ -1244,7 +1392,10 @@ export default function UMTYApp() {
                   </div>
                 </div>
 
-                <Button onClick={handleNotificationSave} className="w-full mt-8 bg-green-500 hover:bg-green-600">
+                <Button
+                  onClick={() => onSaveNotifications(currentNotificationSettings)}
+                  className="w-full mt-8 bg-green-500 hover:bg-green-600"
+                >
                   <Check className="w-4 h-4 mr-2" />
                   Salvar
                 </Button>
@@ -1257,16 +1408,16 @@ export default function UMTYApp() {
   }
 
   const ReadingScreen = () => {
-    const displayScrollId = selectedScrollId || userAppData.currentScrollId
+    const displayScrollId = selectedScrollId || currentScrollId
     const currentScrollData = staticScrolls.find((s) => s.id === displayScrollId) || staticScrolls[0]
-    const currentUserScrollDataForDisplay = userAppData.scrolls[displayScrollId] || {
+    const currentUserScrollProgressForDisplay = allScrollProgress?.find((s) => s.scrollId === displayScrollId) || {
+      scrollId: displayScrollId,
       completedDays: 0,
       lastReadingDate: null,
-      readings: {},
     }
 
-    const isCurrentActiveScroll = displayScrollId === userAppData.currentScrollId
-    const hasCompleted30Days = currentUserScrollDataForDisplay.completedDays >= 30
+    const isCurrentActiveScroll = displayScrollId === currentScrollId
+    const hasCompleted30Days = currentUserScrollProgressForDisplay.completedDays >= 30
 
     return (
       <div className="min-h-screen bg-white">
@@ -1282,7 +1433,7 @@ export default function UMTYApp() {
           </Button>
           <h1 className="text-lg font-bold">Pergaminho {currentScrollData.id}</h1>
           <div className="ml-auto">
-            <Progress value={(currentUserScrollDataForDisplay.completedDays / 30) * 100} className="w-20" />
+            <Progress value={(currentUserScrollProgressForDisplay.completedDays / 30) * 100} className="w-20" />
           </div>
         </div>
 
@@ -1326,7 +1477,7 @@ export default function UMTYApp() {
             </Button>
             {!isCurrentActiveScroll && (
               <p className="text-sm text-red-500" aria-live="polite">
-                Você só pode marcar como lido o Pergaminho {userAppData.currentScrollId}.
+                Você só pode marcar como lido o Pergaminho {currentScrollId}.
               </p>
             )}
             {hasCompleted30Days && (
@@ -1347,7 +1498,14 @@ export default function UMTYApp() {
       case "home":
         return <HomeScreen />
       case "details":
-        return <DetailsScreen />
+        return (
+          <DetailsScreen
+            initialNotificationSettings={
+              userSettings?.notificationSettings || { morning: "07h59", afternoon: "11h59", evening: "20h59" }
+            }
+            onSaveNotifications={handleNotificationSave}
+          />
+        )
       case "reading":
         return <ReadingScreen />
       default:
