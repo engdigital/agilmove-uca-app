@@ -7,6 +7,7 @@ import { Check, ArrowLeft } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 import { db } from "@/lib/db"
 import { useLiveQuery } from "dexie-react-hooks"
@@ -129,10 +130,14 @@ export default function ReadingPage({ params }: ReadingPageProps) {
         <div className="p-6 max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold mb-6 text-center">{currentScrollData.title}</h2>
 
-          <div className="prose prose-lg max-w-none space-y-4 text-gray-800 leading-relaxed">
-            {currentScrollData.fullText.split("\n\n").map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+          <div className="h-96 overflow-hidden">
+            <ScrollArea className="h-full touch-scroll">
+              <div className="prose prose-lg max-w-none space-y-4 text-gray-800 leading-relaxed pr-4">
+                {currentScrollData.fullText.split("\n\n").map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            </ScrollArea>
           </div>
 
           <div className="mt-8 flex flex-col items-center gap-4">
