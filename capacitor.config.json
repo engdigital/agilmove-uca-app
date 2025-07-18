@@ -1,0 +1,28 @@
+{
+  "appId": "br.com.agilmove.uca",
+  "appName": "União, Comprometimento, Ação",
+  "webDir": "out",
+  "server": {
+    "androidScheme": "https"
+  },
+  "ios": {
+    "icon": "public/app-icon.png"
+  },
+  "android": {
+    "icon": "public/app-icon.png",
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false,
+    "appendUserAgent": "AgilMoveUCA",
+    "backgroundColor": "#ffffff"
+  },
+  "plugins": {
+    "App": {
+      "launchShowDuration": 0
+    },
+    "StatusBar": {
+      "style": "default",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}
