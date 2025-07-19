@@ -406,7 +406,7 @@ O projeto está 100% preparado para publicação:
 ## 📱 **Como Funciona o APP**
 
 ### **Conceito Principal**
-O AgilMove UCA é baseado no conceito de **"pergaminhos diários"** - textos motivacionais que devem ser lidos uma vez por dia durante 10 dias consecutivos. O aplicativo:
+O AgilMove UCA é baseado no conceito de **"pergaminhos diários"** - textos motivacionais que devem ser lidos três vezes por dia durante 30 dias consecutivos. O aplicativo:
 
 1. **Apresenta 10 pergaminhos** com mensagens de União, Comprometimento e Ação
 2. **Rastreia o progresso** diário do usuário

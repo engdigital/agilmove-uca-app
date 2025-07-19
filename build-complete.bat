@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 echo.
 echo ========================================
 echo 🚀 BUILD COMPLETO DO AGILMOVE UCA
@@ -7,7 +8,7 @@ echo.
 
 echo 📋 Etapa 1: Configurando ícones...
 cd scripts
-call node setup-app-icons.js
+call node generate-icons.js
 cd ..
 
 echo.
@@ -21,7 +22,7 @@ call npx cap sync
 echo.
 echo 📋 Etapa 4: Gerando APK de Debug...
 cd android
-call gradlew assembleDebug
+call gradlew.bat assembleDebug
 cd ..
 
 echo.
