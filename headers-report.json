@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-07-19T02:09:47.436Z",
+  "score": 100,
+  "scoreText": "Excelente",
+  "configuration": {
+    "configured": true,
+    "headers": [
+      "Content-Security-Policy",
+      "X-Content-Type-Options",
+      "X-Frame-Options",
+      "X-XSS-Protection",
+      "Strict-Transport-Security",
+      "Referrer-Policy",
+      "Permissions-Policy"
+    ],
+    "total": 7,
+    "missing": []
+  },
+  "middleware": {
+    "exists": true,
+    "hasSecurityHeaders": false,
+    "isEmpty": false
+  },
+  "recommendations": []
+}

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-07-19T02:09:33.615Z",
+  "score": 100,
+  "scoreText": "Excelente",
+  "total": 7,
+  "passed": 7,
+  "checks": [
+    {
+      "name": "Content Security Policy",
+      "status": "pass"
+    },
+    {
+      "name": "SecurityProvider Component",
+      "status": "pass"
+    },
+    {
+      "name": "ErrorBoundary Component",
+      "status": "pass"
+    },
+    {
+      "name": "Service Worker",
+      "status": "pass"
+    },
+    {
+      "name": "Manifest PWA",
+      "status": "pass"
+    },
+    {
+      "name": "Página Offline",
+      "status": "pass"
+    },
+    {
+      "name": "Privacy Policy",
+      "status": "pass"
+    }
+  ],
+  "dependencies": {
+    "total": 2,
+    "installed": 2,
+    "missing": []
+  }
+}

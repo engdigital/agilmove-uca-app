@@ -5,6 +5,8 @@ import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import { DbInitializer } from "@/components/db-initializer"
 import { PWAInstaller } from "@/components/pwa-installer"
+import { SecurityProvider } from "@/components/security-provider"
+import { ErrorBoundary } from "@/components/error-boundary"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -100,9 +102,13 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
-        <PWAInstaller />
-        <DbInitializer>{children}</DbInitializer>
-        <Toaster />
+        <ErrorBoundary>
+          <SecurityProvider>
+            <PWAInstaller />
+            <DbInitializer>{children}</DbInitializer>
+            <Toaster />
+          </SecurityProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
