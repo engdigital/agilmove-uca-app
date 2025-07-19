@@ -1,0 +1,19 @@
+# Relatório de Backup - 2025-07-19_01-03 
+ 
+## Arquivos de Backup: 
+agilmove-release_2025-07-19_01-03.keystore
+backup-report_2025-07-19_01-03.txt
+keystore_2025-07-19_01-03.properties
+upload-key_2025-07-19_01-03.keystore
+upload-key_2025-07-19_01-03.properties
+upload_certificate_2025-07-19_01-03.pem
+ 
+## Localização: 
+D:\engdigital\agilmove-uca-app\backup\keystores\ 
+ 
+## Instruções de Recuperação: 
+1. Para restaurar o keystore principal: 
+   copy backup\keystores\agilmove-release_2025-07-19_01-03.keystore android\agilmove-release.keystore 
+ 
+2. Para restaurar o upload key: 
+   copy backup\keystores\upload-key_2025-07-19_01-03.keystore android\upload-key.keystore 

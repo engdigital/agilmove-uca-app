@@ -17,6 +17,8 @@
     "cap:android": "npx cap open android",
     "cap:build": "npm run build && npx cap sync",
     "cap:dev": "npm run cap:build && npm run cap:android",
+    "cap:bundle": "npm run build && npx cap sync && cd android && gradlew bundleRelease",
+    "cap:apk": "npm run build && npx cap sync && cd android && gradlew assembleRelease",
     "security:check": "node security-check.js",
     "security:headers": "node scripts/monitoring/check-headers.js",
     "security:report": "node scripts/monitoring/generate-security-report.js",
@@ -32,7 +34,10 @@
     "store:check": "node scripts/store-readiness-check.js",
     "store:autocheck": "node scripts/monitoring/store-readiness-autocheck.js",
     "store:prepare": "npm run pwa:build && npm run store:autocheck",
-    "store:validate": "npm run build && npm run store:autocheck && echo 'Projeto pronto para submissão às stores!'"
+    "store:validate": "npm run build && npm run store:autocheck && echo 'Projeto pronto para submissão às stores!'",
+    "signing:validate": "validate-google-play-signing.bat",
+    "signing:backup": "backup-keystores.bat",
+    "signing:upload-key": "setup-upload-key.bat"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.2",

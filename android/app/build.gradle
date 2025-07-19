@@ -44,6 +44,21 @@ android {
             }
         }
     }
+    
+    bundle {
+        language {
+            // Desabilita divisão por idioma para manter compatibilidade
+            enableSplit = false
+        }
+        density {
+            // Habilita divisão por densidade de tela para otimização
+            enableSplit = true
+        }
+        abi {
+            // Habilita divisão por arquitetura para reduzir tamanho
+            enableSplit = true
+        }
+    }
 }
 
 repositories {
