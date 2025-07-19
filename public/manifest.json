@@ -10,6 +10,13 @@
   "scope": "/",
   "lang": "pt-BR",
   "categories": ["education", "books", "productivity"],
+  "content_rating": {
+    "rating": "13+",
+    "system": "ESRB",
+    "description": "Aplicativo educacional apropriado para usuários com 13 anos ou mais"
+  },
+  "age_rating": "13+",
+  "target_audience": "teen_adult",
   "icons": [
     {
       "src": "/icon-72x72.png",

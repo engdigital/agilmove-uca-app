@@ -7,6 +7,7 @@ import { DbInitializer } from "@/components/db-initializer"
 import { PWAInstaller } from "@/components/pwa-installer"
 import { SecurityProvider } from "@/components/security-provider"
 import { ErrorBoundary } from "@/components/error-boundary"
+import { AgeVerificationWrapper } from "@/components/age-verification"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -104,11 +105,13 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <SecurityProvider>
-            <PWAInstaller />
-            <DbInitializer>{children}</DbInitializer>
-            <Toaster />
-          </SecurityProvider>
+          <AgeVerificationWrapper>
+            <SecurityProvider>
+              <PWAInstaller />
+              <DbInitializer>{children}</DbInitializer>
+              <Toaster />
+            </SecurityProvider>
+          </AgeVerificationWrapper>
         </ErrorBoundary>
       </body>
     </html>

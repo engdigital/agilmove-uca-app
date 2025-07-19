@@ -98,14 +98,58 @@ export default function PrivacyPolicyPage() {
             das configurações do seu navegador.
           </p>
 
-          <h3>6. Seus Direitos</h3>
+          <h3>6. Proteção de Menores e Verificação de Idade</h3>
+          <p>
+            <strong>Requisito de Idade:</strong> Este aplicativo é destinado a usuários com <strong>13 anos ou mais</strong>. 
+            Implementamos um sistema de verificação de idade obrigatório para garantir conformidade com as regulamentações 
+            de proteção de menores.
+          </p>
+          <ul>
+            <li><strong>Verificação Obrigatória:</strong> Todos os usuários devem verificar sua idade antes de acessar o aplicativo</li>
+            <li><strong>Menores de 13 anos:</strong> Não são permitidos usar este aplicativo sob nenhuma circunstância</li>
+            <li><strong>Entre 13 e 17 anos:</strong> É recomendável supervisão e autorização parental</li>
+            <li><strong>Conteúdo Apropriado:</strong> Todo conteúdo é revisado para ser adequado e educativo</li>
+            <li><strong>Sem Interação Social:</strong> O aplicativo não possui recursos de chat ou comunicação entre usuários</li>
+            <li><strong>Dados de Menores:</strong> Não coletamos dados pessoais de usuários menores de idade</li>
+          </ul>
+          <p>
+            <strong>Para Pais e Responsáveis:</strong> Encorajamos a supervisão parental. Pais podem desinstalar 
+            ou restringir o acesso ao aplicativo através das configurações do dispositivo a qualquer momento.
+          </p>
+
+          <h3>7. Seus Direitos</h3>
           <p>
             Como seus dados são armazenados localmente, você tem controle total sobre eles. Você pode limpar os dados do
             aplicativo a qualquer momento através das configurações do seu navegador (geralmente em "Configurações do
             Site" ou "Dados do Site"), o que removerá todas as suas informações de progresso e configurações.
           </p>
 
-          <h3>7. Alterações e Atualizações desta Política de Privacidade</h3>
+          <h3>7. Seus Direitos</h3>
+          <p>
+            Como seus dados são armazenados localmente, você tem controle total sobre eles. Você pode limpar os dados do
+            aplicativo a qualquer momento através das configurações do seu navegador (geralmente em "Configurações do
+            Site" ou "Dados do Site"), o que removerá todas as suas informações de progresso e configurações.
+          </p>
+
+          <h3>8. Conteúdo de Fontes Abertas e Propriedade Intelectual</h3>
+          <p>
+            <strong>Transparência sobre Conteúdo:</strong> O aplicativo UCA pode incluir conteúdo baseado em textos 
+            de domínio público, fontes abertas ou materiais educacionais amplamente disponíveis, todos devidamente 
+            adaptados para fins educacionais e de desenvolvimento pessoal.
+          </p>
+          <ul>
+            <li><strong>Fontes Abertas:</strong> Alguns pergaminhos podem derivar de textos em domínio público</li>
+            <li><strong>Adaptação Educacional:</strong> Todo conteúdo é revisado e adaptado para contexto educativo</li>
+            <li><strong>Respeito aos Direitos:</strong> Respeitamos todos os direitos de propriedade intelectual</li>
+            <li><strong>Remoção de Conteúdo:</strong> Removemos rapidamente qualquer conteúdo controverso quando notificados</li>
+          </ul>
+          <p>
+            <strong>Solicitação de Remoção:</strong> Se você acredita que algum conteúdo viola direitos autorais ou 
+            é inadequado, entre em contato conosco em <a href="mailto:app-uca@mandara.com.br">app-uca@mandara.com.br</a>. 
+            Analisamos todas as solicitações em até 48 horas e tomamos as medidas apropriadas.
+          </p>
+
+          <h3>9. Alterações e Atualizações desta Política de Privacidade</h3>
           <p>
             Podemos atualizar nossa Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou
             por motivos legais e regulamentares. Quando modificamos esta política, atualizamos a data de "Última atualização"
@@ -114,7 +158,16 @@ export default function PrivacyPolicyPage() {
             alterações que possam afetar seus direitos de privacidade.
           </p>
 
-          <h3>8. Contato e Suporte</h3>
+          <h3>9. Alterações e Atualizações desta Política de Privacidade</h3>
+          <p>
+            Podemos atualizar nossa Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou
+            por motivos legais e regulamentares. Quando modificamos esta política, atualizamos a data de "Última atualização"
+            no final desta página. A versão mais recente estará sempre disponível dentro do aplicativo. 
+            Recomendamos que você revise esta política regularmente para se manter informado sobre quaisquer
+            alterações que possam afetar seus direitos de privacidade.
+          </p>
+
+          <h3>10. Contato e Suporte</h3>
           <p>
             Se você tiver alguma dúvida sobre esta Política de Privacidade, precisar de esclarecimentos sobre como
             seus dados são tratados, ou desejar exercer seus direitos de privacidade, entre em contato conosco através
@@ -126,7 +179,20 @@ export default function PrivacyPolicyPage() {
             <li><strong>Tempo de Resposta:</strong> Respondemos a todas as solicitações em até 48 horas úteis</li>
           </ul>
           
-          <h3>9. Conformidade e Transparência</h3>
+          <h3>10. Contato e Suporte</h3>
+          <p>
+            Se você tiver alguma dúvida sobre esta Política de Privacidade, precisar de esclarecimentos sobre como
+            seus dados são tratados, ou desejar exercer seus direitos de privacidade, entre em contato conosco através
+            dos seguintes canais:
+          </p>
+          <ul>
+            <li><strong>E-mail:</strong> <a href="mailto:app-uca@mandara.com.br">app-uca@mandara.com.br</a></li>
+            <li><strong>Suporte Técnico:</strong> Disponível através do menu do aplicativo</li>
+            <li><strong>Tempo de Resposta:</strong> Respondemos a todas as solicitações em até 48 horas úteis</li>
+            <li><strong>Remoção de Conteúdo:</strong> Solicitações de remoção são processadas prioritariamente</li>
+          </ul>
+          
+          <h3>11. Conformidade e Transparência</h3>
           <p>
             Esta política de privacidade está em conformidade com as melhores práticas de proteção de dados e 
             transparência. Comprometemo-nos a manter você informado sobre como seus dados são tratados e a 
