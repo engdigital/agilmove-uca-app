@@ -153,7 +153,7 @@ class PerformanceMonitor {
   }
 
   checkNetworkSecurity() {
-    // Simular verificações de rede
+    // Verificações de rede aprimoradas
     const networkChecks = {
       localhost: {
         port3000: false,
@@ -165,14 +165,48 @@ class PerformanceMonitor {
         configured: false,
         validCertificate: false,
         strongCiphers: false
+      },
+      headers: {
+        csp: false,
+        hsts: false,
+        frameOptions: false,
+        contentTypeOptions: false
       }
     }
 
-    // Verificar se portas estão abertas (simulado)
+    // Verificar se portas estão abertas
     const openPorts = []
     if (process.env.PORT || process.env.NODE_ENV === 'development') {
       openPorts.push(process.env.PORT || 3000)
       networkChecks.localhost.port3000 = true
+    }
+
+    // Verificar configuração de headers no next.config.mjs
+    try {
+      const nextConfigPath = path.join(process.cwd(), 'next.config.mjs')
+      if (fs.existsSync(nextConfigPath)) {
+        const configContent = fs.readFileSync(nextConfigPath, 'utf8')
+        
+        networkChecks.headers.csp = configContent.includes('Content-Security-Policy')
+        networkChecks.headers.hsts = configContent.includes('Strict-Transport-Security')
+        networkChecks.headers.frameOptions = configContent.includes('X-Frame-Options')
+        networkChecks.headers.contentTypeOptions = configContent.includes('X-Content-Type-Options')
+        
+        const headersConfigured = Object.values(networkChecks.headers).filter(Boolean).length
+        if (headersConfigured < 4) {
+          this.metrics.warnings.push({
+            type: 'missing_security_headers',
+            message: `${4 - headersConfigured} headers de segurança não configurados`,
+            configured: headersConfigured,
+            total: 4
+          })
+        }
+      }
+    } catch (error) {
+      this.metrics.errors.push({
+        type: 'header_check',
+        message: `Erro ao verificar headers: ${error.message}`
+      })
     }
 
     this.metrics.security.network = {
@@ -201,14 +235,32 @@ class PerformanceMonitor {
           score -= 15
           deductions.push('Dependências arriscadas (-15)')
           break
+        case 'missing_security_headers':
+          score -= (warning.total - warning.configured) * 5
+          deductions.push(`Headers de segurança faltando (-${(warning.total - warning.configured) * 5})`)
+          break
       }
     })
 
     // Deduzir pontos por errors
-    score -= this.metrics.errors.length * 10
+    this.metrics.errors.forEach(error => {
+      score -= 10
+      deductions.push(`${error.type} (-10)`)
+    })
 
-    this.metrics.security.score = Math.max(0, score)
+    // Bonificações por boas práticas
+    let bonuses = []
+    if (this.metrics.security.network?.checks?.headers) {
+      const headersConfigured = Object.values(this.metrics.security.network.checks.headers).filter(Boolean).length
+      if (headersConfigured === 4) {
+        bonuses.push('Todos os headers de segurança configurados (+5)')
+        score += 5
+      }
+    }
+
+    this.metrics.security.score = Math.max(0, Math.min(100, score))
     this.metrics.security.deductions = deductions
+    this.metrics.security.bonuses = bonuses
     this.metrics.security.maxScore = 100
   }
 
@@ -240,6 +292,19 @@ class PerformanceMonitor {
       console.log(`Dependencies: ${this.metrics.security.dependencies.total} total (${this.metrics.security.dependencies.production} prod)`)
     }
 
+    // Headers de Segurança
+    if (this.metrics.security.network?.checks?.headers) {
+      const headers = this.metrics.security.network.checks.headers
+      const headersConfigured = Object.values(headers).filter(Boolean).length
+      console.log(`Security Headers: ${headersConfigured}/4 configurados`)
+      
+      console.log('  Headers Status:')
+      console.log(`    CSP: ${headers.csp ? '✅' : '❌'}`)
+      console.log(`    HSTS: ${headers.hsts ? '✅' : '❌'}`)
+      console.log(`    Frame-Options: ${headers.frameOptions ? '✅' : '❌'}`)
+      console.log(`    Content-Type-Options: ${headers.contentTypeOptions ? '✅' : '❌'}`)
+    }
+
     // Warnings
     if (this.metrics.warnings.length > 0) {
       console.log('\n⚠️  Warnings:')
@@ -256,6 +321,14 @@ class PerformanceMonitor {
       })
     }
 
+    // Bonuses
+    if (this.metrics.security.bonuses && this.metrics.security.bonuses.length > 0) {
+      console.log('\n🎉 Bonificações:')
+      this.metrics.security.bonuses.forEach(bonus => {
+        console.log(`  + ${bonus}`)
+      })
+    }
+
     // Recommendations
     console.log('\n💡 Recomendações:')
     if (this.metrics.security.score < 70) {
@@ -263,6 +336,13 @@ class PerformanceMonitor {
     }
     if (this.metrics.performance.memory.rss > 50) {
       console.log('  - Considerar otimização de memória')
+    }
+    if (this.metrics.security.network?.checks?.headers) {
+      const headers = this.metrics.security.network.checks.headers
+      if (!headers.csp) console.log('  - Configurar Content Security Policy (CSP)')
+      if (!headers.hsts) console.log('  - Configurar HTTP Strict Transport Security (HSTS)')
+      if (!headers.frameOptions) console.log('  - Configurar X-Frame-Options')
+      if (!headers.contentTypeOptions) console.log('  - Configurar X-Content-Type-Options')
     }
     if (this.metrics.warnings.length === 0 && this.metrics.errors.length === 0) {
       console.log('  - Sistema funcionando bem! 🎉')

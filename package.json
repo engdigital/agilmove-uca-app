@@ -19,9 +19,16 @@
     "security:performance": "node scripts/monitoring/performance-monitor.js",
     "security:full": "npm run security:check && npm run security:headers && npm run security:report",
     "monitoring:start": "npm run security:performance",
+    "monitoring:auto": "node scripts/monitoring/auto-monitor.js",
+    "monitoring:continuous": "node scripts/monitoring/auto-monitor.js continuous",
+    "monitoring:status": "node scripts/monitoring/auto-monitor.js status",
     "monitoring:headers": "npm run security:headers",
     "monitoring:report": "npm run security:report",
-    "monitoring:dashboard": "echo 'Dashboard disponível em: http://localhost:3000/security-dashboard'"
+    "monitoring:dashboard": "echo 'Dashboard disponível em: http://localhost:3000/security-dashboard'",
+    "store:check": "node scripts/store-readiness-check.js",
+    "store:autocheck": "node scripts/monitoring/store-readiness-autocheck.js",
+    "store:prepare": "npm run pwa:build && npm run store:autocheck",
+    "store:validate": "npm run build && npm run store:autocheck && echo 'Projeto pronto para submissão às stores!'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

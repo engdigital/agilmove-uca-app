@@ -1,0 +1,61 @@
+{
+  "lastUpdate": "2025-07-19T02:56:13.214Z",
+  "currentState": {
+    "failures": 0,
+    "lastCheck": "2025-07-19T02:56:13.213Z",
+    "lastScore": 97,
+    "isRunning": false
+  },
+  "config": {
+    "checkInterval": 30000,
+    "reportThreshold": 85,
+    "maxFailures": 3,
+    "logFile": "D:\\engdigital\\agilmove-uca-app\\continuous-monitoring.log"
+  },
+  "latest": {
+    "timestamp": "2025-07-19T02:56:12.794Z",
+    "security": {
+      "success": true,
+      "score": 100,
+      "output": "🔍 Verificação de Segurança - AgilMove UCA\n\n📋 Verificações de Segurança:\n==================================================\n✅ Content Security Policy\n✅ SecurityProvider Component\n✅ ErrorBoundary Component\n✅ Service Worker\n✅ Manifest PWA\n✅ Página Offline\n✅ Privacy Policy\n\n📦 Dependências de Segurança:\n==================================================\n✅ Instaladas: 2/2\n\n📊 Resultado Final:\n==================================================\n🟢 Pontuação: 100% (Excelente)\n   Aprovado: 7/7 verificações\n\n📄 Relatório salvo em: security-report.json\n\n🚀 Para melhorar a segurança, execute:\n   npm run security:full\n",
+      "warnings": ""
+    },
+    "store": {
+      "success": true,
+      "score": 90,
+      "output": "🏪 Verificação Automática para Stores - AgilMove UCA\n\n🔄 Iniciando verificação automática...\n\n📱 Verificando Manifest.json otimizado para PWA...\n   ✅ Manifest: 20/20 pontos\n🎨 Verificando ícones em todas as resoluções...\n   ✅ Ícones: 10/10 encontrados\n   📊 Score: 16/16 pontos\n⚙️ Verificando Service Worker com cache inteligente...\n   ✅ Service Worker: 15/15 pontos\n📄 Verificando página offline personalizada...\n   ✅ Página Offline: 8/10 pontos\n🔒 Verificando headers de segurança obrigatórios...\n   ✅ Headers: 5/5 configurados\n   📊 Score: 20/20 pontos\n📋 Verificando política de privacidade estruturada...\n   ✅ Política de Privacidade: 7/15 pontos\n\n📊 RELATÓRIO FINAL:\n============================================================\n\n🎯 Pontuação Total: 86/96 (90%)\n🟢 Status para Stores: EXCELENTE\n🏪 Pronto para publicação: ✅ SIM\n\n📋 Detalhamento por Item:\n   ✅ manifest: 20/20 (100%)\n   ✅ icons: 16/16 (100%)\n   ✅ serviceWorker: 15/15 (100%)\n   ✅ offlinePage: 8/10 (80%)\n   ✅ securityHeaders: 20/20 (100%)\n   ❌ privacyPolicy: 7/15 (47%)\n\n💡 MELHORIAS SUGERIDAS:\n   💡 Adicionar botão de reconexão\n   💡 Mencionar uso de cookies/storage\n\n🚀 PRÓXIMOS PASSOS:\n   🎉 Parabéns! Seu app está pronto para as stores!\n   📱 Execute: npm run store:prepare\n   🔧 Execute: npm run build\n\n📄 Relatório detalhado salvo em: store-readiness-autocheck-report.json\n\n✅ Verificação concluída - App PRONTO para stores\n",
+      "warnings": ""
+    },
+    "performance": {
+      "success": true,
+      "score": 100,
+      "output": "📊 Monitoramento de Performance - AgilMove UCA\n\n🔄 Coletando métricas...\n📊 Relatório de Monitoramento:\n==================================================\n\n🚀 Performance:\nMemory Usage: 44MB (Heap: 4MB)\nUptime: 0s\nNode Version: v22.16.0\n\n🔒 Segurança:\nSecurity Score: 100/100\nDependencies: 59 total (52 prod)\nSecurity Headers: 4/4 configurados\n  Headers Status:\n    CSP: ✅\n    HSTS: ✅\n    Frame-Options: ✅\n    Content-Type-Options: ✅\n\n🎉 Bonificações:\n  + Todos os headers de segurança configurados (+5)\n\n💡 Recomendações:\n  - Sistema funcionando bem! 🎉\n\n🕒 Timestamp: 18/07/2025, 23:56:13\n📁 Métricas salvas em: D:\\engdigital\\agilmove-uca-app\\monitoring-metrics.json\n\n✅ Monitoramento concluído\n",
+      "warnings": ""
+    },
+    "averageScore": 97
+  },
+  "history": [
+    {
+      "timestamp": "2025-07-19T02:56:12.794Z",
+      "security": {
+        "success": true,
+        "score": 100,
+        "output": "🔍 Verificação de Segurança - AgilMove UCA\n\n📋 Verificações de Segurança:\n==================================================\n✅ Content Security Policy\n✅ SecurityProvider Component\n✅ ErrorBoundary Component\n✅ Service Worker\n✅ Manifest PWA\n✅ Página Offline\n✅ Privacy Policy\n\n📦 Dependências de Segurança:\n==================================================\n✅ Instaladas: 2/2\n\n📊 Resultado Final:\n==================================================\n🟢 Pontuação: 100% (Excelente)\n   Aprovado: 7/7 verificações\n\n📄 Relatório salvo em: security-report.json\n\n🚀 Para melhorar a segurança, execute:\n   npm run security:full\n",
+        "warnings": ""
+      },
+      "store": {
+        "success": true,
+        "score": 90,
+        "output": "🏪 Verificação Automática para Stores - AgilMove UCA\n\n🔄 Iniciando verificação automática...\n\n📱 Verificando Manifest.json otimizado para PWA...\n   ✅ Manifest: 20/20 pontos\n🎨 Verificando ícones em todas as resoluções...\n   ✅ Ícones: 10/10 encontrados\n   📊 Score: 16/16 pontos\n⚙️ Verificando Service Worker com cache inteligente...\n   ✅ Service Worker: 15/15 pontos\n📄 Verificando página offline personalizada...\n   ✅ Página Offline: 8/10 pontos\n🔒 Verificando headers de segurança obrigatórios...\n   ✅ Headers: 5/5 configurados\n   📊 Score: 20/20 pontos\n📋 Verificando política de privacidade estruturada...\n   ✅ Política de Privacidade: 7/15 pontos\n\n📊 RELATÓRIO FINAL:\n============================================================\n\n🎯 Pontuação Total: 86/96 (90%)\n🟢 Status para Stores: EXCELENTE\n🏪 Pronto para publicação: ✅ SIM\n\n📋 Detalhamento por Item:\n   ✅ manifest: 20/20 (100%)\n   ✅ icons: 16/16 (100%)\n   ✅ serviceWorker: 15/15 (100%)\n   ✅ offlinePage: 8/10 (80%)\n   ✅ securityHeaders: 20/20 (100%)\n   ❌ privacyPolicy: 7/15 (47%)\n\n💡 MELHORIAS SUGERIDAS:\n   💡 Adicionar botão de reconexão\n   💡 Mencionar uso de cookies/storage\n\n🚀 PRÓXIMOS PASSOS:\n   🎉 Parabéns! Seu app está pronto para as stores!\n   📱 Execute: npm run store:prepare\n   🔧 Execute: npm run build\n\n📄 Relatório detalhado salvo em: store-readiness-autocheck-report.json\n\n✅ Verificação concluída - App PRONTO para stores\n",
+        "warnings": ""
+      },
+      "performance": {
+        "success": true,
+        "score": 100,
+        "output": "📊 Monitoramento de Performance - AgilMove UCA\n\n🔄 Coletando métricas...\n📊 Relatório de Monitoramento:\n==================================================\n\n🚀 Performance:\nMemory Usage: 44MB (Heap: 4MB)\nUptime: 0s\nNode Version: v22.16.0\n\n🔒 Segurança:\nSecurity Score: 100/100\nDependencies: 59 total (52 prod)\nSecurity Headers: 4/4 configurados\n  Headers Status:\n    CSP: ✅\n    HSTS: ✅\n    Frame-Options: ✅\n    Content-Type-Options: ✅\n\n🎉 Bonificações:\n  + Todos os headers de segurança configurados (+5)\n\n💡 Recomendações:\n  - Sistema funcionando bem! 🎉\n\n🕒 Timestamp: 18/07/2025, 23:56:13\n📁 Métricas salvas em: D:\\engdigital\\agilmove-uca-app\\monitoring-metrics.json\n\n✅ Monitoramento concluído\n",
+        "warnings": ""
+      },
+      "averageScore": 97
+    }
+  ]
+}

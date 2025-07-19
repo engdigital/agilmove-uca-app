@@ -54,10 +54,36 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            margin: 0.5rem;
         }
         .btn:hover {
             background: rgba(255, 255, 255, 0.3);
             border-color: rgba(255, 255, 255, 0.5);
+        }
+        .btn-primary {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+        .btn-primary:hover {
+            background: rgba(34, 197, 94, 0.5);
+        }
+        .connection-status {
+            margin: 1rem 0;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .status-offline {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .status-checking {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        .status-online {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
         .status {
             margin-top: 2rem;
@@ -78,35 +104,133 @@
             Parece que você perdeu a conexão com a internet. 
             O AgilMove UCA funciona offline, mas algumas funcionalidades podem estar limitadas.
         </p>
-        <button class="btn" onclick="window.location.reload()">
-            Tentar Novamente
-        </button>
+        
+        <div id="connectionStatus" class="connection-status status-offline">
+            🔴 Sem conexão com a internet
+        </div>
+        
+        <div class="actions">
+            <button id="reconnectBtn" class="btn btn-primary" onclick="attemptReconnection()">
+                🔄 Tentar Reconectar
+            </button>
+            <button class="btn" onclick="continueOffline()">
+                📱 Continuar Offline
+            </button>
+        </div>
         <div class="status">
             <strong>Funcionalidades offline disponíveis:</strong><br>
             • Leitura dos pergaminhos<br>
             • Registro de progresso<br>
             • Visualização de estatísticas<br>
-            • Configurações locais
+            • Configurações locais<br><br>
+            
+            <strong>💡 Dica de Reconexão:</strong><br>
+            • Verifique sua conexão Wi-Fi<br>
+            • Tente alternar entre Wi-Fi e dados móveis<br>
+            • Reinicie seu roteador se necessário<br>
+            • O app tentará reconectar automaticamente
         </div>
     </div>
 
     <script>
+        // Estado da conexão
+        let isChecking = false;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+        
+        // Elementos
+        const statusElement = document.getElementById('connectionStatus');
+        const reconnectBtn = document.getElementById('reconnectBtn');
+        
         // Verificar conectividade
         function checkConnection() {
             if (navigator.onLine) {
-                window.location.href = '/';
+                updateConnectionStatus('online', '🟢 Conexão restaurada! Redirecionando...');
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1500);
+                return true;
             }
+            return false;
         }
-
-        // Verificar a cada 5 segundos
-        setInterval(checkConnection, 5000);
+        
+        // Atualizar status da conexão
+        function updateConnectionStatus(status, message) {
+            statusElement.className = `connection-status status-${status}`;
+            statusElement.textContent = message;
+        }
+        
+        // Tentar reconectar
+        async function attemptReconnection() {
+            if (isChecking) return;
+            
+            isChecking = true;
+            reconnectAttempts++;
+            
+            updateConnectionStatus('checking', '🟡 Verificando conexão...');
+            reconnectBtn.disabled = true;
+            reconnectBtn.textContent = '🔄 Verificando...';
+            
+            try {
+                // Tentar fazer uma requisição para verificar conectividade real
+                const response = await fetch('/', { 
+                    method: 'HEAD', 
+                    cache: 'no-cache',
+                    signal: AbortSignal.timeout(5000)
+                });
+                
+                if (response.ok) {
+                    updateConnectionStatus('online', '🟢 Conexão restaurada! Redirecionando...');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                    return;
+                }
+            } catch (error) {
+                console.log('Ainda offline:', error.message);
+            }
+            
+            // Se chegou aqui, ainda está offline
+            setTimeout(() => {
+                if (reconnectAttempts >= maxReconnectAttempts) {
+                    updateConnectionStatus('offline', '🔴 Múltiplas tentativas falharam. Verifique sua rede.');
+                    reconnectBtn.textContent = '🔄 Tentar Novamente';
+                } else {
+                    updateConnectionStatus('offline', `🔴 Ainda offline (tentativa ${reconnectAttempts}/${maxReconnectAttempts})`);
+                    reconnectBtn.textContent = '🔄 Tentar Reconectar';
+                }
+                reconnectBtn.disabled = false;
+                isChecking = false;
+            }, 2000);
+        }
+        
+        // Continuar no modo offline
+        function continueOffline() {
+            window.location.href = '/home';
+        }
+        
+        // Verificação automática a cada 10 segundos
+        setInterval(() => {
+            if (!isChecking) {
+                checkConnection();
+            }
+        }, 10000);
 
         // Escutar evento de volta da conexão
         window.addEventListener('online', () => {
-            window.location.href = '/';
+            if (!isChecking) {
+                updateConnectionStatus('online', '🟢 Conexão detectada! Verificando...');
+                setTimeout(checkConnection, 500);
+            }
+        });
+        
+        // Escutar evento de perda da conexão
+        window.addEventListener('offline', () => {
+            updateConnectionStatus('offline', '🔴 Conexão perdida');
+            reconnectAttempts = 0;
         });
 
-        console.log('Página offline carregada');
+        console.log('Página offline carregada com sistema de reconexão avançado');
     </script>
 </body>
 </html>

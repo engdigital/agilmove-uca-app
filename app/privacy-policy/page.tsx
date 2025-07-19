@@ -35,16 +35,20 @@ export default function PrivacyPolicyPage() {
             O aplicativo UCA foi projetado para funcionar completamente offline e **não coleta nem armazena seus dados
             pessoais em servidores externos**. Todas as informações relacionadas ao seu progresso de leitura,
             configurações de notificação e histórico de leituras são armazenadas **exclusivamente no seu dispositivo
-            local** (utilizando o IndexedDB do navegador).
+            local** (utilizando o IndexedDB do navegador e localStorage para configurações).
           </p>
           <ul>
             <li>
-              <strong>Dados Armazenados Localmente:</strong>
+              <strong>Dados Armazenados Localmente (Local Storage/IndexedDB):</strong>
               <ul>
                 <li>Seu progresso de leitura dos pergaminhos (dias completos, último dia de leitura).</li>
                 <li>Suas configurações de notificação (horários preferidos).</li>
                 <li>Registros de leitura (qual pergaminho foi lido, em qual período e data).</li>
+                <li>Preferências do aplicativo (tema, configurações de interface).</li>
               </ul>
+            </li>
+            <li>
+              <strong>Cookies e Armazenamento Local:</strong> O aplicativo utiliza apenas cookies técnicos essenciais e storage local (localStorage/IndexedDB) para funcionar corretamente. Não utilizamos cookies de rastreamento ou publicidade.
             </li>
             <li>
               <strong>Nenhuma Coleta de Dados Pessoais:</strong> Não coletamos seu nome, e-mail, localização ou qualquer
@@ -78,26 +82,57 @@ export default function PrivacyPolicyPage() {
             notificações a qualquer momento nas configurações do seu dispositivo ou do aplicativo.
           </p>
 
-          <h3>5. Seus Direitos</h3>
+          <h3>5. Cookies e Tecnologias de Storage</h3>
+          <p>
+            O aplicativo UCA utiliza tecnologias de armazenamento local para garantir seu funcionamento adequado:
+          </p>
+          <ul>
+            <li><strong>Cookies Técnicos:</strong> Utilizamos apenas cookies essenciais para o funcionamento do aplicativo, como preferências de interface e configurações de sessão.</li>
+            <li><strong>Local Storage:</strong> Armazenamos configurações do usuário e preferências no localStorage do navegador.</li>
+            <li><strong>IndexedDB:</strong> Banco de dados local onde são armazenados seus progressos e histórico de leitura.</li>
+            <li><strong>Service Worker Cache:</strong> Cache local para permitir funcionamento offline do aplicativo.</li>
+          </ul>
+          <p>
+            <strong>Importante:</strong> Não utilizamos cookies de rastreamento, publicidade ou análise de comportamento. 
+            Todos os dados permanecem exclusivamente no seu dispositivo e você pode limpá-los a qualquer momento através 
+            das configurações do seu navegador.
+          </p>
+
+          <h3>6. Seus Direitos</h3>
           <p>
             Como seus dados são armazenados localmente, você tem controle total sobre eles. Você pode limpar os dados do
             aplicativo a qualquer momento através das configurações do seu navegador (geralmente em "Configurações do
             Site" ou "Dados do Site"), o que removerá todas as suas informações de progresso e configurações.
           </p>
 
-          <h3>6. Alterações nesta Política de Privacidade</h3>
+          <h3>7. Alterações e Atualizações desta Política de Privacidade</h3>
           <p>
-            Podemos atualizar nossa Política de Privacidade periodicamente. A versão mais recente estará sempre
-            disponível dentro do aplicativo. Recomendamos que você revise esta política regularmente para quaisquer
-            alterações.
+            Podemos atualizar nossa Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou
+            por motivos legais e regulamentares. Quando modificamos esta política, atualizamos a data de "Última atualização"
+            no final desta página. A versão mais recente estará sempre disponível dentro do aplicativo. 
+            Recomendamos que você revise esta política regularmente para se manter informado sobre quaisquer
+            alterações que possam afetar seus direitos de privacidade.
           </p>
 
-          <h3>7. Contato</h3>
+          <h3>8. Contato e Suporte</h3>
           <p>
-            Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco através do e-mail:{" "}
-            <a href="mailto:app-uca@mandara.com.br">app-uca@mandara.com.br</a>.
+            Se você tiver alguma dúvida sobre esta Política de Privacidade, precisar de esclarecimentos sobre como
+            seus dados são tratados, ou desejar exercer seus direitos de privacidade, entre em contato conosco através
+            dos seguintes canais:
           </p>
-          <p className="text-xs text-gray-500 mt-8">Última atualização: 14 de Julho de 2025</p>
+          <ul>
+            <li><strong>E-mail:</strong> <a href="mailto:app-uca@mandara.com.br">app-uca@mandara.com.br</a></li>
+            <li><strong>Suporte Técnico:</strong> Disponível através do menu do aplicativo</li>
+            <li><strong>Tempo de Resposta:</strong> Respondemos a todas as solicitações em até 48 horas úteis</li>
+          </ul>
+          
+          <h3>9. Conformidade e Transparência</h3>
+          <p>
+            Esta política de privacidade está em conformidade com as melhores práticas de proteção de dados e 
+            transparência. Comprometemo-nos a manter você informado sobre como seus dados são tratados e a 
+            respeitar sua privacidade em todas as interações com o aplicativo UCA.
+          </p>
+          <p className="text-xs text-gray-500 mt-8">Última atualização: 18 de Julho de 2025</p>
         </div>
       </div>
     </div>

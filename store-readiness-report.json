@@ -1,0 +1,168 @@
+{
+  "timestamp": "2025-07-19T02:49:11.289Z",
+  "finalScore": 89,
+  "scoreText": "Pronto para Stores",
+  "categories": {
+    "PWA": {
+      "total": 20,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Manifest.json completo",
+          "status": true,
+          "message": "Completo"
+        },
+        {
+          "name": "Service Worker ativo",
+          "status": false,
+          "message": "Service Worker configurado corretamente"
+        }
+      ]
+    },
+    "Assets": {
+      "total": 20,
+      "passed": 20,
+      "items": [
+        {
+          "name": "Ícones em todas as resoluções",
+          "status": true,
+          "message": "Todos os ícones presentes"
+        },
+        {
+          "name": "Screenshots para stores",
+          "status": true,
+          "message": "4 screenshots encontradas (mínimo: 2)"
+        }
+      ]
+    },
+    "UX": {
+      "total": 10,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Página offline funcional",
+          "status": true,
+          "message": "Página offline completa"
+        }
+      ]
+    },
+    "Segurança": {
+      "total": 10,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Headers de segurança configurados",
+          "status": true,
+          "message": "6/6 headers configurados"
+        }
+      ]
+    },
+    "Legal": {
+      "total": 10,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Política de privacidade",
+          "status": true,
+          "message": "Política de privacidade completa"
+        }
+      ]
+    },
+    "Mobile": {
+      "total": 10,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Meta tags para mobile",
+          "status": true,
+          "message": "4/4 meta tags configuradas"
+        }
+      ]
+    },
+    "Build": {
+      "total": 10,
+      "passed": 10,
+      "items": [
+        {
+          "name": "Configuração de build para PWA",
+          "status": "next start",
+          "message": "Scripts de build configurados"
+        }
+      ]
+    }
+  },
+  "requirements": [
+    {
+      "name": "Manifest.json completo",
+      "category": "PWA",
+      "result": {
+        "status": true,
+        "message": "Completo"
+      }
+    },
+    {
+      "name": "Ícones em todas as resoluções",
+      "category": "Assets",
+      "result": {
+        "status": true,
+        "message": "Todos os ícones presentes"
+      }
+    },
+    {
+      "name": "Service Worker ativo",
+      "category": "PWA",
+      "result": {
+        "status": false,
+        "message": "Service Worker configurado corretamente"
+      }
+    },
+    {
+      "name": "Página offline funcional",
+      "category": "UX",
+      "result": {
+        "status": true,
+        "message": "Página offline completa"
+      }
+    },
+    {
+      "name": "Headers de segurança configurados",
+      "category": "Segurança",
+      "result": {
+        "status": true,
+        "message": "6/6 headers configurados"
+      }
+    },
+    {
+      "name": "Política de privacidade",
+      "category": "Legal",
+      "result": {
+        "status": true,
+        "message": "Política de privacidade completa"
+      }
+    },
+    {
+      "name": "Meta tags para mobile",
+      "category": "Mobile",
+      "result": {
+        "status": true,
+        "message": "4/4 meta tags configuradas"
+      }
+    },
+    {
+      "name": "Screenshots para stores",
+      "category": "Assets",
+      "result": {
+        "status": true,
+        "message": "4 screenshots encontradas (mínimo: 2)"
+      }
+    },
+    {
+      "name": "Configuração de build para PWA",
+      "category": "Build",
+      "result": {
+        "status": "next start",
+        "message": "Scripts de build configurados"
+      }
+    }
+  ]
+}

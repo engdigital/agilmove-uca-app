@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-07-19T03:02:56.623Z",
+  "items": {
+    "manifest": {
+      "score": 20,
+      "maxScore": 20,
+      "issues": [],
+      "status": "pass"
+    },
+    "icons": {
+      "score": 16,
+      "maxScore": 16,
+      "issues": [],
+      "foundIcons": [
+        72,
+        96,
+        128,
+        144,
+        152,
+        192,
+        384,
+        512,
+        "favicon.png",
+        "apple-touch-icon.png"
+      ],
+      "status": "pass"
+    },
+    "serviceWorker": {
+      "score": 15,
+      "maxScore": 15,
+      "issues": [],
+      "status": "pass"
+    },
+    "offlinePage": {
+      "score": 10,
+      "maxScore": 10,
+      "issues": [],
+      "status": "pass"
+    },
+    "securityHeaders": {
+      "score": 20,
+      "maxScore": 20,
+      "issues": [],
+      "foundHeaders": [
+        "Content-Security-Policy",
+        "X-Content-Type-Options",
+        "X-Frame-Options",
+        "Strict-Transport-Security",
+        "Referrer-Policy"
+      ],
+      "status": "pass"
+    },
+    "privacyPolicy": {
+      "score": 15,
+      "maxScore": 15,
+      "issues": [],
+      "status": "pass"
+    }
+  },
+  "score": 96,
+  "maxScore": 96,
+  "readyForStores": true,
+  "criticalIssues": [],
+  "improvements": []
+}

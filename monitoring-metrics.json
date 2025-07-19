@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-07-19T02:40:30.145Z",
+  "timestamp": "2025-07-19T02:56:13.180Z",
   "performance": {
     "memory": {
-      "rss": 37,
+      "rss": 44,
       "heapTotal": 5,
       "heapUsed": 4,
       "external": 1
     },
     "cpu": {
       "user": 0,
-      "system": 0
+      "system": 31000
     },
     "uptime": 0,
     "nodeVersion": "v22.16.0"
@@ -20,8 +20,8 @@
         "file": "package.json",
         "exists": true,
         "permissions": "666",
-        "size": 3511,
-        "modified": "2025-07-19T02:38:33.930Z"
+        "size": 4069,
+        "modified": "2025-07-19T02:55:25.433Z"
       },
       {
         "file": ".env",
@@ -58,12 +58,21 @@
           "configured": false,
           "validCertificate": false,
           "strongCiphers": false
+        },
+        "headers": {
+          "csp": true,
+          "hsts": true,
+          "frameOptions": true,
+          "contentTypeOptions": true
         }
       },
-      "timestamp": "2025-07-19T02:40:30.147Z"
+      "timestamp": "2025-07-19T02:56:13.182Z"
     },
     "score": 100,
     "deductions": [],
+    "bonuses": [
+      "Todos os headers de segurança configurados (+5)"
+    ],
     "maxScore": 100
   },
   "errors": [],
