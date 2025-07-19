@@ -12,10 +12,10 @@ import { AgeVerificationWrapper } from "@/components/age-verification"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AgilMove UCA - União, Comprometimento, Ação",
+  title: "UCA - Pergaminhos",
   description: "Aplicativo para acompanhar sua jornada de leitura dos pergaminhos UCA",
   generator: 'Next.js',
-  applicationName: 'AgilMove UCA',
+  applicationName: 'UCA - Pergaminhos',
   referrer: 'origin-when-cross-origin',
   keywords: ['UCA', 'pergaminhos', 'leitura', 'agilmove', 'desenvolvimento pessoal'],
   authors: [{ name: 'AgilMove' }],
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'AgilMove UCA - União, Comprometimento, Ação',
+    title: 'UCA - Pergaminhos',
     description: 'Aplicativo para acompanhar sua jornada de leitura dos pergaminhos UCA',
     url: 'https://uca.agilmove.com',
-    siteName: 'AgilMove UCA',
+    siteName: 'UCA - Pergaminhos',
     locale: 'pt_BR',
     type: 'website',
     images: [

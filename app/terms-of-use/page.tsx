@@ -28,7 +28,7 @@ export default function TermsOfUsePage() {
           
           <h3>1. Aceitação dos Termos</h3>
           <p>
-            Ao acessar e usar o aplicativo "UCA" (União, Comprometimento, Ação), você aceita e 
+            Ao acessar e usar o aplicativo "UCA - Pergaminhos", você aceita e 
             concorda em estar vinculado aos termos e condições descritos neste documento. Se você 
             não concordar com qualquer parte destes termos, não deve usar este aplicativo.
           </p>

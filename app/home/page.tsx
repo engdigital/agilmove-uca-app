@@ -113,7 +113,7 @@ export default function HomePage() {
     return allScrollProgress?.every((s) => s.completedDays >= 30) || false
   }, [allScrollProgress])
 
-  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0-dev"
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.1"
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen transition-all duration-300 ease-in-out">
@@ -253,7 +253,7 @@ export default function HomePage() {
             </Button>
           </div>
         )}
-        <div className="p-4 text-center text-gray-500 text-sm space-y-1">
+        <div className="p-4 text-center text-gray-500 text-sm space-y-1 pb-20">
           <p>Versão do App: {appVersion}</p>
           <Link href="/privacy-policy" className="text-gray-500 hover:underline">
             Política de Privacidade

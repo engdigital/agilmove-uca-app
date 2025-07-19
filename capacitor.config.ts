@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'br.com.agilmove.uca',
-  appName: 'União, Comprometimento, Ação',
+  appName: 'UCA - Pergaminhos',
   webDir: 'out',
   server: {
     androidScheme: 'https'

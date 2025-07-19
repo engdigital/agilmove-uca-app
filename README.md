@@ -1,11 +1,11 @@
-# 📱 AgilMove UCA - União, Comprometimento, Ação
+# 📱 UCA - Pergaminhos
 
 ![Status](https://img.shields.io/badge/Status-Produção%20Ready-brightgreen)
 ![PWA](https://img.shields.io/badge/PWA-✓-blue)
 ![Android](https://img.shields.io/badge/Android-Ready-green)
 ![Security](https://img.shields.io/badge/Security-High-red)
 
-**AgilMove UCA** é uma **Progressive Web App (PWA)** completa e segura, desenvolvida para auxiliar usuários a manterem uma rotina de leitura e desenvolvimento pessoal baseada em "pergaminhos" motivacionais. O aplicativo oferece rastreamento de progresso, feedback motivacional, notificações inteligentes e está pronto para distribuição em app stores.
+**UCA - Pergaminhos** é uma **Progressive Web App (PWA)** completa e segura, desenvolvida para auxiliar usuários a manterem uma rotina de leitura e desenvolvimento pessoal baseada em "pergaminhos" motivacionais. O aplicativo oferece rastreamento de progresso, feedback motivacional, notificações inteligentes e está pronto para distribuição em app stores.
 
 ---
 
@@ -21,8 +21,8 @@ cd agilmove-uca-app
 # 2. Instale as dependências
 npm install --legacy-peer-deps
 
-# 3. Execute o setup inicial dos ícones PWA
-npm run pwa:setup
+# 3. Configure ícones PWA e Android
+npm run icons:setup
 
 # 4. Inicie o servidor de desenvolvimento
 npm run dev
@@ -191,11 +191,19 @@ npm run lint         # ESLint checker
 
 #### **📱 PWA e Ícones**
 ```bash
-npm run pwa:setup    # Configuração completa PWA + ícones
-npm run pwa:build    # Build PWA otimizado
-npm run pwa:validate # Validar configurações PWA
-npm run icons:generate # Gerar apenas ícones
-npm run icons:check  # Verificar ícones existentes
+npm run pwa:setup      # Configuração PWA básica (apenas ícones PWA)
+npm run pwa:build      # Build PWA otimizado
+npm run pwa:validate   # Validar configurações PWA
+
+# 🎨 Configuração Completa de Ícones (RECOMENDADO)
+npm run icons:setup    # PWA + Android (configuração completa)
+npm run icons:generate # Gerar apenas ícones PWA
+npm run icons:android  # Configurar ícones Android (resolve problema de ícone padrão)
+npm run icons:check    # Verificar status de todos os ícones
+npm run icons:verify   # Verificar apenas ícones PWA
+
+# 📱 Script de Automação
+.\setup-icons-complete.bat  # Configuração automatizada completa (Windows)
 ```
 
 #### **🤖 Android e Mobile**
@@ -225,8 +233,8 @@ git clone [repo-url]
 cd agilmove-uca-app
 npm install --legacy-peer-deps
 
-# 2. Configure PWA
-npm run pwa:setup
+# 2. Configure ícones PWA + Android (IMPORTANTE)
+npm run icons:setup
 
 # 3. Teste local
 npm run dev
@@ -406,7 +414,7 @@ O projeto está 100% preparado para publicação:
 ## 📱 **Como Funciona o APP**
 
 ### **Conceito Principal**
-O AgilMove UCA é baseado no conceito de **"pergaminhos diários"** - textos motivacionais que devem ser lidos três vezes por dia durante 30 dias consecutivos. O aplicativo:
+O UCA - Pergaminhos é baseado no conceito de **"pergaminhos diários"** - textos motivacionais que devem ser lidos três vezes por dia durante 30 dias consecutivos. O aplicativo:
 
 1. **Apresenta 10 pergaminhos** com mensagens de União, Comprometimento e Ação
 2. **Rastreia o progresso** diário do usuário
@@ -450,6 +458,39 @@ Launch Screen → Home Screen → Details → Reading → Analytics
 
 ---
 
+## 🎨 **Configuração de Ícones Android**
+
+### **❌ Problema: Ícone padrão aparece no Android**
+Se o ícone do punho não aparece quando o app é instalado no Android, execute:
+
+```bash
+# Método 1: Automático (RECOMENDADO)
+.\setup-icons-complete.bat
+
+# Método 2: npm script
+npm run icons:setup
+
+# Método 3: Manual
+npm run icons:android
+npm run build
+npx cap sync
+```
+
+### **✅ Verificar se ícones estão configurados**
+```bash
+npm run icons:check
+# Deve mostrar: "🎉 Configuração de ícones COMPLETA!"
+```
+
+### **📱 Testar no Android Studio**
+1. `npx cap open android`
+2. `Build` → `Clean Project`
+3. `Build` → `Rebuild Project`
+4. `Build` → `Build APK(s)`
+5. Instalar APK e verificar ícone
+
+---
+
 ## 🚨 **Resolução de Problemas Comuns**
 
 ### **Erro: "Sharp não encontrado"**
@@ -482,6 +523,18 @@ npm run cap:sync
 2. Para APK debug: aceite instalação de apps não-Play Store
 3. Para APK release: verifique se está assinado corretamente
 
+### **Ícone padrão aparece no Android (em vez do punho)**
+```bash
+# Solução rápida
+npm run icons:setup
+
+# Ou script automático
+.\setup-icons-complete.bat
+
+# Verificar se resolveu
+npm run icons:check
+```
+
 ### **Service Worker não funcionando**
 1. Verifique HTTPS (required para SW)
 2. Chrome Dev Tools > Application > Service Workers
@@ -506,17 +559,24 @@ npm run build
 - [ ] Android Studio instalado (para builds móveis)
 - [ ] Repositório clonado
 - [ ] `npm install --legacy-peer-deps` executado
-- [ ] `npm run pwa:setup` executado
+- [ ] `npm run icons:setup` executado (PWA + Android)
+- [ ] `npm run icons:check` mostra "Configuração COMPLETA"
+- [ ] `npm run dev` funcionando em http://localhost:3000
+- [ ] Testado em dispositivo móvel ou emulador
 - [ ] `npm run dev` funcionando em http://localhost:3000
 - [ ] Testado em dispositivo móvel ou emulador
 
 ### **✅ Checklist - APK de Desenvolvimento**
+### **✅ Checklist - APK de Desenvolvimento**
+- [ ] `npm run icons:setup` executado com sucesso
+- [ ] `npm run icons:check` mostra "Configuração COMPLETA"
 - [ ] `npm run build` sem erros
 - [ ] `npm run cap:sync` sem erros
 - [ ] Android Studio abre o projeto corretamente
 - [ ] Gradle sync completa sem erros
 - [ ] APK debug gerado em `android/app/build/outputs/apk/debug/`
 - [ ] APK instalado e funcionando no dispositivo
+- [ ] Ícone do punho aparece corretamente (não ícone padrão)
 
 ### **✅ Checklist - APK de Produção**
 - [ ] Keystore configurado (`.\setup-keystore.bat`)
@@ -539,6 +599,7 @@ npm run build
 ## 📚 **Documentação Adicional**
 
 ### **Arquivos de Documentação Específica**
+- **[ANDROID_ICONS_FIXED.md](./ANDROID_ICONS_FIXED.md)** - ✨ **NOVO** - Resolução do problema de ícones Android
 - **[SECURE_HOOKS.md](./SECURE_HOOKS.md)** - Detalhes dos hooks seguros implementados
 - **[MONITORING.md](./MONITORING.md)** - Sistema de monitoramento e segurança
 - **[KEYSTORE_PRODUCTION.md](./KEYSTORE_PRODUCTION.md)** - Configuração de keystores
@@ -584,6 +645,6 @@ Para dúvidas específicas, consulte:
 
 ---
 
-**🎉 AgilMove UCA - Transformando desenvolvimento pessoal em ação!**
+**🎉 UCA - Pergaminhos - Transformando desenvolvimento pessoal em ação!**
 
 *União • Comprometimento • Ação*

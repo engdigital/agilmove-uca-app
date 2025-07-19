@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
         <div className="p-6 max-w-2xl mx-auto prose prose-sm sm:prose-base">
           <h2>Política de Privacidade do Aplicativo UCA</h2>
           <p>
-            Esta Política de Privacidade descreve como o aplicativo "UCA" (União, Comprometimento, Ação) coleta, usa e
+            Esta Política de Privacidade descreve como o aplicativo "UCA - Pergaminhos" coleta, usa e
             protege suas informações. Ao usar nosso aplicativo, você concorda com os termos desta política.
           </p>
 

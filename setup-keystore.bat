@@ -19,7 +19,7 @@ set ALIAS_NAME=agilmove-release
 echo 📝 Usando configurações padrão:
 echo    Alias: %ALIAS_NAME%
 echo    Organização: AgilMove
-echo    Aplicação: União, Comprometimento, Ação
+echo    Aplicação: UCA - Pergaminhos
 echo.
 
 echo 🔄 Criando keystore...
