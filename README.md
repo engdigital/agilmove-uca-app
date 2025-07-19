@@ -1,6 +1,27 @@
-## APP UCA União Comprometimento Ação
+# 📱 APP UCA União Comprometimento Ação
 
-O "APP UCA União Comprometimento Ação" é uma aplicação web desenvolvida com foco em dispositivos móveis, projetada para auxiliar usuários a manterem uma rotina de leitura e desenvolvimento pessoal, baseada em "pergaminhos" com textos motivacionais. O aplicativo rastreia o progresso de leitura, oferece feedback motivacional e permite a configuração de lembretes.
+O "APP UCA União Comprometimento Ação" é uma **Progressive Web App (PWA)** desenvolvida com foco em dispositivos móveis, projetada para auxiliar usuários a manterem uma rotina de leitura e desenvolvimento pessoal, baseada em "pergaminhos" com textos motivacionais. O aplicativo rastreia o progresso de leitura, oferece feedback motivacional e permite a configuração de lembretes.
+
+## 🚀 **Fases de Desenvolvimento**
+
+### ✅ **Fase 1 - PWA Completa** 
+- **PWA Manifest**: Configuração completa para instalação
+- **Service Worker**: Cache offline e notificações push
+- **Ícones**: Adaptados para Android/iOS (192x192, 512x512)
+- **Tela Splash**: Configurada para todos os dispositivos
+- **Meta Tags**: SEO e mobile otimizados
+
+### ✅ **Fase 3 - Hooks Seguros** (CONCLUÍDA)
+- **useSecureStorage**: Armazenamento local com validação e criptografia
+- **useSecureNotifications**: Notificações seguras com sanitização
+- **SecureInput**: Componente de entrada com validação avançada
+- **useSecureInput**: Hook com sanitização HTML/JS e rate limiting
+- **Documentação**: [SECURE_HOOKS.md](./SECURE_HOOKS.md)
+
+### 🎯 **Próximas Fases**
+- **Fase 2**: Analytics e métricas de engajamento
+- **Fase 4**: Autenticação e sincronização
+- **Fase 5**: Recursos sociais e gamificação
 
 ### 1. Estrutura de Arquivos
 
