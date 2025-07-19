@@ -1,12 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Script para build do APK do AgilMove UCA
+:: Script para build do APK do UCA - Pergaminhos
 :: Uso: build-apk.bat [debug|release]
 
 set "BUILD_TYPE=%1"
 if "%BUILD_TYPE%"=="" set "BUILD_TYPE=debug"
-set "APP_NAME=AgilMove UCA"
+set "APP_NAME=UCA - Pergaminhos"
 set "PACKAGE_ID=br.com.agilmove.uca"
 
 echo 🚀 Iniciando build do APK para %APP_NAME%
@@ -34,6 +34,13 @@ if %errorlevel% neq 0 (
 if not exist "node_modules" (
     echo 📦 Instalando dependências...
     npm install --legacy-peer-deps
+)
+
+:: Configurar ícones PWA + Android
+echo 🎨 Configurando ícones PWA + Android...
+npm run icons:setup
+if %errorlevel% neq 0 (
+    echo ⚠️ Aviso: Erro na configuração de ícones (continuando build...)
 )
 
 :: Fazer build do projeto web

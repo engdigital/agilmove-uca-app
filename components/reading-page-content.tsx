@@ -226,7 +226,7 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
                   htmlFor="terms"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  Confirmo que li e refleti sobre o texto deste pergaminho
+                  Declaro que li o texto completo do pergaminho pois quem faz as coisas pela metade é um FRACASSADO!
                 </label>
               </div>
 

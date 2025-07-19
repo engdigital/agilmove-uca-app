@@ -1,17 +1,22 @@
 @echo off
 echo.
 echo ========================================
-echo 🚀 BUILD DE PRODUÇÃO - AGILMOVE UCA
+echo 🚀 BUILD DE PRODUÇÃO - UCA PERGAMINHOS
 echo ========================================
 echo.
 
 echo 📋 Este script irá:
-echo    1. Fazer build do Next.js
-echo    2. Sincronizar com Capacitor
-echo    3. Gerar APK de produção assinado
+echo    1. Configurar ícones PWA + Android
+echo    2. Fazer build do Next.js
+echo    3. Sincronizar com Capacitor
+echo    4. Gerar APK de produção assinado
 echo.
 
-echo 🔄 Passo 1: Build do Next.js...
+echo 🔄 Passo 1: Configurando ícones...
+call npm run icons:setup
+
+echo.
+echo 🔄 Passo 2: Build do Next.js...
 call npm run build
 
 if %ERRORLEVEL% neq 0 (
@@ -21,7 +26,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo.
-echo 🔄 Passo 2: Sincronizando com Capacitor...
+echo 🔄 Passo 3: Sincronizando com Capacitor...
 call npx cap sync
 
 if %ERRORLEVEL% neq 0 (

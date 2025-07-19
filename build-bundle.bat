@@ -2,10 +2,15 @@
 echo.
 echo ========================================
 echo 📦 BUILD ANDROID APP BUNDLE (AAB)
+echo    UCA - PERGAMINHOS
 echo ========================================
 echo.
 
-echo 🔄 1. Building Next.js application...
+echo 🔄 1. Configurando ícones PWA + Android...
+call npm run icons:setup
+
+echo.
+echo 🔄 2. Building Next.js application...
 call npm run build
 if %ERRORLEVEL% neq 0 (
     echo ❌ Erro no build do Next.js!
@@ -14,7 +19,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo.
-echo 🔄 2. Syncing Capacitor...
+echo 🔄 3. Syncing Capacitor...
 call npx cap sync
 if %ERRORLEVEL% neq 0 (
     echo ❌ Erro no sync do Capacitor!
@@ -23,7 +28,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo.
-echo 🔄 3. Building Android App Bundle...
+echo 🔄 4. Building Android App Bundle...
 cd android
 call gradlew.bat bundleRelease
 if %ERRORLEVEL% neq 0 (
