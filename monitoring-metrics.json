@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-07-19T02:40:30.145Z",
+  "performance": {
+    "memory": {
+      "rss": 37,
+      "heapTotal": 5,
+      "heapUsed": 4,
+      "external": 1
+    },
+    "cpu": {
+      "user": 0,
+      "system": 0
+    },
+    "uptime": 0,
+    "nodeVersion": "v22.16.0"
+  },
+  "security": {
+    "fileSystem": [
+      {
+        "file": "package.json",
+        "exists": true,
+        "permissions": "666",
+        "size": 3511,
+        "modified": "2025-07-19T02:38:33.930Z"
+      },
+      {
+        "file": ".env",
+        "exists": false
+      },
+      {
+        "file": ".env.local",
+        "exists": false
+      },
+      {
+        "file": "security-check.js",
+        "exists": true,
+        "permissions": "666",
+        "size": 6731,
+        "modified": "2025-07-19T02:26:39.491Z"
+      }
+    ],
+    "dependencies": {
+      "total": 59,
+      "production": 52,
+      "development": 7,
+      "risky": []
+    },
+    "network": {
+      "openPorts": [],
+      "checks": {
+        "localhost": {
+          "port3000": false,
+          "port3001": false,
+          "port443": false,
+          "port80": false
+        },
+        "ssl": {
+          "configured": false,
+          "validCertificate": false,
+          "strongCiphers": false
+        }
+      },
+      "timestamp": "2025-07-19T02:40:30.147Z"
+    },
+    "score": 100,
+    "deductions": [],
+    "maxScore": 100
+  },
+  "errors": [],
+  "warnings": []
+}

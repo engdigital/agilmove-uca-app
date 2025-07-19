@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-07-19T02:40:29.764Z",
+  "version": "1.0.0",
+  "project": "AgilMove UCA",
+  "phase": "Fase 4 - Monitoramento",
+  "summary": {
+    "status": "warning",
+    "message": "Segurança moderada. Melhorias necessárias."
+  },
+  "details": {
+    "securityHooks": {
+      "score": 100,
+      "passed": 5,
+      "total": 5,
+      "status": "pass",
+      "output": true
+    },
+    "securityHeaders": {
+      "score": 0,
+      "status": "warning",
+      "tested": false,
+      "reason": "Servidor não disponível para teste"
+    },
+    "performance": {
+      "score": 100,
+      "status": "pass",
+      "monitored": true
+    },
+    "projectStructure": {
+      "score": 100,
+      "status": "pass",
+      "requiredFiles": 7,
+      "existingFiles": 7,
+      "missingFiles": []
+    },
+    "documentation": {
+      "score": 80,
+      "status": "pass",
+      "files": {
+        "README.md": {
+          "exists": true,
+          "hasContent": true,
+          "isUpdated": true,
+          "size": 8256
+        },
+        "SECURE_HOOKS.md": {
+          "exists": true,
+          "hasContent": true,
+          "isUpdated": true,
+          "size": 6732
+        },
+        "BUILD_ANDROID.md": {
+          "exists": true,
+          "hasContent": true,
+          "isUpdated": false,
+          "size": 3144
+        },
+        "SECURITY_IMPROVEMENTS.md": {
+          "exists": true,
+          "hasContent": true,
+          "isUpdated": false,
+          "size": 5795
+        }
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "category": "Security Headers",
+      "message": "Configure headers de segurança no servidor",
+      "action": "Implementar middleware de segurança"
+    }
+  ],
+  "score": 79
+}
