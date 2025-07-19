@@ -30,7 +30,7 @@ cd android\app
 if exist agilmove-release.keystore del agilmove-release.keystore
 
 :: Criar o keystore
-keytool -genkeypair -v -keystore agilmove-release.keystore -alias %ALIAS_NAME% -keyalg RSA -keysize 2048 -validity 10000 -storepass %STORE_PASSWORD% -keypass %KEY_PASSWORD% -dname "CN=AgilMove Team, OU=Development, O=AgilMove, L=São Paulo, ST=SP, C=BR"
+keytool -genkeypair -v -keystore agilmove-release.keystore -alias %ALIAS_NAME% -keyalg RSA -keysize 2048 -validity 10000 -storepass %STORE_PASSWORD% -keypass %KEY_PASSWORD% -dname "CN=AgilMove Team, OU=Development, O=AgilMove, L=Sao Paulo, ST=SP, C=BR"
 
 if %ERRORLEVEL% neq 0 (
     echo ❌ Erro ao criar keystore!
