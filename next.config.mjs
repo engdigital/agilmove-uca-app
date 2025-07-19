@@ -11,8 +11,8 @@ const nextConfig = {
   },
   // Headers de segurança - removidos porque não funcionam com output: export
   // Para usar headers de segurança, você precisaria de um servidor web que os configure
-  // Configuração de exportação para PWA
-  output: 'export',
+  // Configuração de exportação para PWA - comentado temporariamente para suportar rotas dinâmicas
+  // output: 'export',
   trailingSlash: true,
   // Configuração de rewrites - removida porque não funciona com output: export
   // Configuração de compressão
