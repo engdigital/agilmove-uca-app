@@ -7,9 +7,6 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   },
-  ios: {
-    icon: 'public/app-icon.png'
-  },
   plugins: {
     App: {
       launchShowDuration: 0
@@ -20,14 +17,11 @@ const config: CapacitorConfig = {
     }
   },
   android: {
-    icon: 'public/app-icon.png',
     allowMixedContent: false,
     captureInput: true,
     webContentsDebuggingEnabled: false,
     appendUserAgent: 'AgilMoveUCA',
-    backgroundColor: '#ffffff',
-    overrideUserAgent: undefined,
-    appendUserAgent: undefined
+    backgroundColor: '#ffffff'
   }
 };
 

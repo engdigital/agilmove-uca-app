@@ -83,8 +83,8 @@ const nextConfig = {
       }
     ]
   },
-  // Configuração de exportação para PWA - comentado temporariamente para suportar rotas dinâmicas
-  // output: 'export',
+  // Configuração de exportação para PWA e Capacitor
+  output: 'export',
   trailingSlash: true,
   // Configuração de compressão
   compress: true,
