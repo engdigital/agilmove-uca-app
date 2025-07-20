@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react" // Importar useMemo
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Award, RotateCcw, Flame } from "lucide-react"
+import { Award, RotateCcw, Flame, BookOpen, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
@@ -171,6 +171,27 @@ export default function HomePage() {
             {currentScrollConsecutiveDays === 0 && (
               <p className="text-sm text-gray-500 mt-2">Comece a ler hoje para iniciar sua sequência!</p>
             )}
+          </Card>
+
+          {/* Link para o guia de leitura */}
+          <Card 
+            className="mb-4 cursor-pointer hover:shadow-md transition-all duration-200 hover:scale-[1.02] bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200"
+            onClick={() => router.push("/reading-guide")}
+          >
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <BookOpen className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-1">Entenda como ler os pergaminhos</h3>
+                  <p className="text-sm text-blue-600">
+                    Aprenda as regras de confirmação, contagem de dias e como ler corretamente
+                  </p>
+                </div>
+                <ArrowLeft className="w-5 h-5 text-blue-500 transform rotate-180" />
+              </div>
+            </CardContent>
           </Card>
 
         </div>

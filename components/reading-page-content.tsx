@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Check, ArrowLeft } from "lucide-react"
+import { Check, ArrowLeft, Volume2, VolumeX } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
@@ -203,6 +203,45 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
             </div>
           )}
         </div>
+
+        {/* Reading Instructions */}
+        {isCurrentActiveScroll && (
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-6 border border-orange-200">
+            <div className={`p-4 rounded-lg border-l-4 ${
+              currentPeriod === "evening" 
+                ? "bg-blue-50 border-blue-400" 
+                : "bg-orange-50 border-orange-400"
+            }`}>
+              <div className="flex items-center gap-3">
+                {currentPeriod === "evening" ? (
+                  <Volume2 className="w-6 h-6 text-blue-600" />
+                ) : (
+                  <VolumeX className="w-6 h-6 text-orange-600" />
+                )}
+                <div>
+                  <h3 className={`font-semibold ${
+                    currentPeriod === "evening" ? "text-blue-800" : "text-orange-800"
+                  }`}>
+                    {currentPeriod === "evening" 
+                      ? "🌙 Leitura da Noite - EM VOZ ALTA" 
+                      : "🌅 Leitura Silenciosa"
+                    }
+                  </h3>
+                  <p className={`text-sm mt-1 ${
+                    currentPeriod === "evening" ? "text-blue-700" : "text-orange-700"
+                  }`}>
+                    {currentPeriod === "evening" 
+                      ? "Para a leitura da noite, você deve ler o pergaminho EM VOZ ALTA. Isso ajuda a fixar melhor o conteúdo em sua mente."
+                      : currentPeriod === "morning"
+                        ? "Para a leitura da manhã, você deve ler o pergaminho EM SILÊNCIO, permitindo que as palavras se gravem em sua mente."
+                        : "Para a leitura da tarde, você deve ler o pergaminho EM SILÊNCIO, absorvendo profundamente cada ensinamento."
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Full Text */}
         <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-6 border border-orange-200">
