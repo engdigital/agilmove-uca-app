@@ -113,7 +113,7 @@ export default function HomePage() {
     return allScrollProgress?.every((s) => s.completedDays >= 30) || false
   }, [allScrollProgress])
 
-  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.2"
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.3"
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen transition-all duration-300 ease-in-out">
