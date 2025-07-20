@@ -125,7 +125,6 @@ agilmove-uca-app/
 │   ├── launch/                  # Tela de boas-vindas
 │   ├── details/                 # Detalhes dos pergaminhos
 │   ├── reading/                 # Interface de leitura
-│   ├── analytics/               # Dashboard de progresso
 │   ├── secure-hooks/            # Demo dos hooks seguros
 │   ├── security-dashboard/      # Painel de monitoramento
 │   ├── privacy-policy/          # Política de privacidade
@@ -424,10 +423,10 @@ O UCA - Pergaminhos é baseado no conceito de **"pergaminhos diários"** - texto
 
 ### **Fluxo de Usuário**
 ```
-Launch Screen → Home Screen → Details → Reading → Analytics
-     ↓              ↓           ↓         ↓         ↓
-  Boas-vindas   Lista de     Detalhes   Leitura   Progresso
-  e instruções  pergaminhos  do scroll  diária    e métricas
+Launch Screen → Home Screen → Details → Reading
+     ↓              ↓           ↓         ↓
+  Boas-vindas   Lista de     Detalhes   Leitura
+  e instruções  pergaminhos  do scroll  diária
 ```
 
 ### **Funcionalidades Principais**
@@ -443,12 +442,6 @@ Launch Screen → Home Screen → Details → Reading → Analytics
 - Timer de leitura (tempo mínimo sugerido)
 - Botão de confirmação de leitura
 - Feedback motivacional após confirmação
-
-#### **📊 Analytics**
-- Gráfico de progresso diário
-- Estatísticas de consistência  
-- Medalhas e conquistas
-- Histórico completo de leituras
 
 #### **⚙️ Configurações**
 - Horário preferido para lembretes

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react" // Importar useMemo
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Award, RotateCcw, Flame, BarChart2 } from "lucide-react"
+import { Award, RotateCcw, Flame } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
@@ -173,15 +173,6 @@ export default function HomePage() {
             )}
           </Card>
 
-          <Card
-            className="mb-4 cursor-pointer hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
-            onClick={() => router.push("/analytics")}
-          >
-            <CardContent className="p-4 flex items-center justify-center gap-4">
-              <BarChart2 className="w-8 h-8 text-blue-600" />
-              <h2 className="text-xl font-bold text-blue-600">Ver Análises de Leitura</h2>
-            </CardContent>
-          </Card>
         </div>
 
         <div className="p-4 space-y-4">

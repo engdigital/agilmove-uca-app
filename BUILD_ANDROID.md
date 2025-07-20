@@ -124,4 +124,4 @@ gradlew.bat clean # Windows
 2. **Subir para Google Play Store** (se necessário)
 3. **Configurar CI/CD** para builds automatizados
 4. **Adicionar testes** automatizados
-5. **Implementar analytics** e crash reporting
+5. **Implementar crash reporting**

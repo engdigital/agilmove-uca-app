@@ -24,12 +24,12 @@ npm install sharp --save-dev --legacy-peer-deps
 - Middleware já estava comentado corretamente
 - Aviso aparece mas não impede funcionamento
 
-### 4. **❌ Falta react-is para recharts**
-**Problema**: `Module not found: Can't resolve 'react-is'`
-**✅ Solução**: 
-```bash
-npm install react-is --legacy-peer-deps
-```
+### 4. **✅ Dependências de gráficos removidas**
+**Situação**: Funcionalidade de análises de leitura removida
+**✅ Ação**: 
+- Removido `recharts` e `react-is` do package.json
+- Removido componente `chart.tsx`
+- App funciona sem funcionalidade de gráficos
 
 ### 5. **❌ generateStaticParams missing**
 **Problema**: `Page "/reading/[scrollId]" is missing "generateStaticParams()"`

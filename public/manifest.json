@@ -109,13 +109,6 @@
       "description": "Acesso rápido à sua leitura atual",
       "url": "/home",
       "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Ver Progresso",
-      "short_name": "Progresso", 
-      "description": "Veja suas estatísticas de leitura",
-      "url": "/analytics",
-      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
     }
   ],
   "related_applications": [],

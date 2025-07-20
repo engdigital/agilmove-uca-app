@@ -10,7 +10,6 @@ const CORE_ASSETS = [
   '/home',
   '/launch',
   '/details',
-  '/analytics',
   '/privacy-policy',
   '/manifest.json',
   '/icon-192x192.png',

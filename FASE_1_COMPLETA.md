@@ -122,8 +122,7 @@ Verificar se está "Running" e "Activated"
 
 ### **Para Melhorias:**
 1. **Notificações Backend**: Implementar servidor push
-2. **Analytics**: Adicionar tracking PWA
-3. **Updates**: Versionamento automático
+2. **Updates**: Versionamento automático
 
 ---
 
