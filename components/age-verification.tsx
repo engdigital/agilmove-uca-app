@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { useSecureStorage } from "@/components/security-provider"
+import { useRouter } from "next/navigation"
 
 interface AgeVerificationModalProps {
   isOpen: boolean
@@ -13,6 +14,12 @@ export function AgeVerificationModal({ isOpen, onVerified }: AgeVerificationModa
   const [birthYear, setBirthYear] = useState("")
   const [isValid, setIsValid] = useState(false)
   const [error, setError] = useState("")
+  const router = useRouter()
+
+  const handleLinkClick = (path: string) => {
+    // Abrir o link em uma nova aba/janela
+    window.open(path, '_blank', 'noopener,noreferrer')
+  }
 
   const validateAge = (year: string) => {
     const currentYear = new Date().getFullYear()
@@ -118,13 +125,21 @@ export function AgeVerificationModal({ isOpen, onVerified }: AgeVerificationModa
           <div className="text-center">
             <p className="text-xs text-gray-500">
               Ao continuar, você aceita nossos{' '}
-              <a href="/terms-of-use" className="text-blue-600 underline">
+              <button 
+                type="button"
+                onClick={() => handleLinkClick('/terms-of-use')}
+                className="text-blue-600 underline hover:text-blue-800 cursor-pointer bg-transparent border-none p-0"
+              >
                 Termos de Uso
-              </a>{' '}
+              </button>{' '}
               e{' '}
-              <a href="/privacy-policy" className="text-blue-600 underline">
+              <button 
+                type="button"
+                onClick={() => handleLinkClick('/privacy-policy')}
+                className="text-blue-600 underline hover:text-blue-800 cursor-pointer bg-transparent border-none p-0"
+              >
                 Política de Privacidade
-              </a>
+              </button>
             </p>
           </div>
         </div>
