@@ -244,7 +244,7 @@ export default function HomePage() {
             </Button>
           </div>
         )}
-        <div className="p-4 text-center text-gray-500 text-sm space-y-1 pb-20">
+        <div className="p-4 text-center text-gray-500 text-sm space-y-1 pb-10">
           <p>Versão do App: {appVersion}</p>
           <Link href="/privacy-policy" className="text-gray-500 hover:underline">
             Política de Privacidade
