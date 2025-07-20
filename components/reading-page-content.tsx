@@ -13,6 +13,7 @@ import { db } from "@/lib/db"
 import { useLiveQuery } from "dexie-react-hooks"
 import { staticScrolls } from "@/lib/scrolls"
 import { formatDateToKey, getReadingDay, getPeriod, calculateCompletedDays, formatDateToDisplay } from "@/lib/app-utils"
+import { useAndroidBackHandler } from "@/hooks/use-android-back-handler"
 
 interface ReadingPageContentProps {
   scrollId: number
@@ -22,6 +23,9 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
   const router = useRouter()
   const { toast } = useToast()
   const [agreedToTerms, setAgreedToTerms] = useState(false)
+  
+  // Hook para tratar o botão voltar do Android
+  useAndroidBackHandler()
 
   const displayScrollId = scrollId
 

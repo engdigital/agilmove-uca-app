@@ -17,8 +17,8 @@ export function AgeVerificationModal({ isOpen, onVerified }: AgeVerificationModa
   const router = useRouter()
 
   const handleLinkClick = (path: string) => {
-    // Abrir o link em uma nova aba/janela
-    window.open(path, '_blank', 'noopener,noreferrer')
+    // Navegação interna - abre na mesma janela/app
+    router.push(path)
   }
 
   const validateAge = (year: string) => {

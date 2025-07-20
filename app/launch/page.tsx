@@ -4,9 +4,13 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Link from "next/link" // Importar Link
+import { useAndroidBackHandler } from "@/hooks/use-android-back-handler"
 
 export default function LaunchPage() {
   const router = useRouter()
+  
+  // Hook para tratar o botão voltar do Android
+  useAndroidBackHandler()
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-600 to-purple-700 flex flex-col text-white">

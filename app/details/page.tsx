@@ -14,6 +14,7 @@ import { db, type ReadingEntry, type UserSettings } from "@/lib/db"
 import { useLiveQuery } from "dexie-react-hooks"
 import { staticScrolls } from "@/lib/scrolls"
 import { formatDateToDisplay, isDayCompleted, calculateConsecutiveDays, getMotivationalMessage } from "@/lib/app-utils"
+import { useAndroidBackHandler } from "@/hooks/use-android-back-handler"
 
 // Constante para controlar a visibilidade da aba de notificações
 const ENABLE_NOTIFICATIONS = false // Mude para 'true' para reativar a aba de notificações
@@ -35,6 +36,9 @@ function urlBase64ToUint8Array(base64String: string) {
 export default function DetailsPage() {
   const router = useRouter()
   const { toast } = useToast()
+  
+  // Hook para tratar o botão voltar do Android
+  useAndroidBackHandler()
 
   const userSettings = useLiveQuery(() => db.userSettings.get("settings"), [])
   const allScrollProgress = useLiveQuery(() => db.scrollProgress.toArray(), [])

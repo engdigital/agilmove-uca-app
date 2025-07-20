@@ -9,10 +9,15 @@ import { useLiveQuery } from "dexie-react-hooks"
 import { db, type ReadingEntry } from "@/lib/db"
 import { staticScrolls } from "@/lib/scrolls"
 import { formatDateToDisplay } from "@/lib/app-utils"
+import { useAndroidBackHandler } from "@/hooks/use-android-back-handler"
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } from "recharts"
 
 export default function AnalyticsPage() {
   const router = useRouter()
+  
+  // Hook para tratar o botão voltar do Android
+  useAndroidBackHandler()
+  
   const allReadings = useLiveQuery(() => db.readings.toArray(), [])
   const allScrollProgress = useLiveQuery(() => db.scrollProgress.toArray(), [])
 

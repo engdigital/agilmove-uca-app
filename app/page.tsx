@@ -4,9 +4,13 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { db, type UserSettings } from "@/lib/db" // Import UserSettings type
 import { staticScrolls } from "@/lib/scrolls"
+import { useAndroidBackHandler } from "@/hooks/use-android-back-handler"
 
 export default function RootPage() {
   const router = useRouter()
+  // Hook para tratar o botão voltar do Android
+  useAndroidBackHandler()
+  
   // settings: undefined = carregando, null = não encontrado, objeto = encontrado
   const [settings, setSettings] = useState<UserSettings | null | undefined>(undefined)
   const [isProcessingRedirect, setIsProcessingRedirect] = useState(false) // Para evitar múltiplos redirecionamentos
