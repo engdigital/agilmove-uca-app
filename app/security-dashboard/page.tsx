@@ -8,7 +8,7 @@ export default function SecurityDashboardPage() {
   useAndroidBackHandler()
   
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-10 pb-10">
       <SecurityDashboard />
     </div>
   )

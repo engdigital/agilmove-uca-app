@@ -135,7 +135,7 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
   const canConfirmReading = isCurrentActiveScroll && !hasCurrentPeriodReading && agreedToTerms
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 p-4 pt-10 pb-10">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

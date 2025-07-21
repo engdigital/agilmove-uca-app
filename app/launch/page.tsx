@@ -13,7 +13,7 @@ export default function LaunchPage() {
   useAndroidBackHandler()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-600 to-purple-700 flex flex-col text-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-600 to-purple-700 flex flex-col text-white pt-10 pb-10">
       {/* Imagem da equipe na parte superior */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-sm">

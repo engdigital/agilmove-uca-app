@@ -117,7 +117,7 @@ export default function HomePage() {
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen transition-all duration-300 ease-in-out">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-10 pb-10">
         <div className="bg-white p-6 shadow-sm">
           <h1 className="text-xl font-bold mb-4">Você está no Pergaminho {currentScrollId}</h1>
 

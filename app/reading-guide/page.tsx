@@ -14,7 +14,7 @@ export default function ReadingGuidePage() {
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-10 pb-10">
         {/* Header */}
         <div className="bg-white p-4 shadow-sm sticky top-0 z-10">
           <div className="flex items-center gap-3">
