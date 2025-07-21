@@ -14,6 +14,36 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Force portrait orientation - prevent layout changes on rotation */
+html, body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* Lock orientation to portrait - CSS approach */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+  }
+}
+
+/* Ensure portrait layout is maintained */
+.portrait-lock {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 /* Scroll containers */
 .scroll-container {
   touch-action: pan-y;

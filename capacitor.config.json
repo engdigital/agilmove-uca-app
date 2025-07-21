@@ -23,6 +23,9 @@
     "StatusBar": {
       "style": "default",
       "backgroundColor": "#ffffff"
+    },
+    "ScreenOrientation": {
+      "orientation": "portrait-primary"
     }
   }
 }

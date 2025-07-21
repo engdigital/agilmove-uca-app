@@ -8,6 +8,7 @@ import { PWAInstaller } from "@/components/pwa-installer"
 import { SecurityProvider } from "@/components/security-provider"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { AgeVerificationWrapper } from "@/components/age-verification"
+import { OrientationLock } from "@/components/orientation-lock"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -89,6 +90,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="orientation" content="portrait" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -103,16 +106,18 @@ export default function RootLayout({
         <link rel="mask-icon" href="/icon-512x512.png" color="#3b82f6" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={inter.className}>
-        <ErrorBoundary>
-          <AgeVerificationWrapper>
-            <SecurityProvider>
-              <PWAInstaller />
-              <DbInitializer>{children}</DbInitializer>
-              <Toaster />
-            </SecurityProvider>
-          </AgeVerificationWrapper>
-        </ErrorBoundary>
+      <body className={`${inter.className} portrait-lock`}>
+        <OrientationLock>
+          <ErrorBoundary>
+            <AgeVerificationWrapper>
+              <SecurityProvider>
+                <PWAInstaller />
+                <DbInitializer>{children}</DbInitializer>
+                <Toaster />
+              </SecurityProvider>
+            </AgeVerificationWrapper>
+          </ErrorBoundary>
+        </OrientationLock>
       </body>
     </html>
   )

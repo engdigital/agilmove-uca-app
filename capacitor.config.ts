@@ -7,6 +7,13 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   },
+  android: {
+    allowMixedContent: false,
+    captureInput: true,
+    webContentsDebuggingEnabled: false,
+    appendUserAgent: 'AgilMoveUCA',
+    backgroundColor: '#ffffff'
+  },
   plugins: {
     App: {
       launchShowDuration: 0
@@ -14,14 +21,10 @@ const config: CapacitorConfig = {
     StatusBar: {
       style: 'default',
       backgroundColor: '#ffffff'
+    },
+    ScreenOrientation: {
+      orientation: 'portrait-primary'
     }
-  },
-  android: {
-    allowMixedContent: false,
-    captureInput: true,
-    webContentsDebuggingEnabled: false,
-    appendUserAgent: 'AgilMoveUCA',
-    backgroundColor: '#ffffff'
   }
 };
 
