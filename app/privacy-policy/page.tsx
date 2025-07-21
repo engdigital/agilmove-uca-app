@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
           <div className="space-y-8">
             <div className="text-center bg-blue-50 p-6 rounded-lg">
               <h2 className="text-2xl font-bold text-blue-800 mb-4">
-                Política de Privacidade do Aplicativo UCA
+                Política de Privacidade do Aplicativo "UCA - Pergaminhos" - Pergaminhos
               </h2>
               <p className="text-blue-700 leading-relaxed">
                 Esta Política de Privacidade descreve como o aplicativo "UCA - Pergaminhos" coleta, usa e
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    O aplicativo UCA foi projetado para funcionar completamente offline e <strong>não coleta nem armazena seus dados
+                    O aplicativo "UCA - Pergaminhos" foi projetado para funcionar completamente offline e <strong>não coleta nem armazena seus dados
                     pessoais em servidores externos</strong>. Todas as informações relacionadas ao seu progresso de leitura,
                     configurações de notificação e histórico de leituras são armazenadas <strong>exclusivamente no seu dispositivo
                     local</strong> (utilizando o IndexedDB do navegador e localStorage para configurações).
@@ -181,7 +181,7 @@ export default function PrivacyPolicyPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    O aplicativo UCA utiliza tecnologias de armazenamento local para garantir seu funcionamento adequado:
+                    O aplicativo "UCA - Pergaminhos" utiliza tecnologias de armazenamento local para garantir seu funcionamento adequado:
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
@@ -295,7 +295,7 @@ export default function PrivacyPolicyPage() {
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-bold text-blue-800 mb-2">🔍 Transparência sobre Conteúdo:</h4>
                     <p className="text-blue-700 text-sm">
-                      O aplicativo UCA pode incluir conteúdo baseado em textos 
+                      O aplicativo "UCA - Pergaminhos" pode incluir conteúdo baseado em textos 
                       de domínio público, fontes abertas ou materiais educacionais amplamente disponíveis, todos devidamente 
                       adaptados para fins educacionais e de desenvolvimento pessoal.
                     </p>
@@ -400,7 +400,7 @@ export default function PrivacyPolicyPage() {
                   <p className="text-green-700 leading-relaxed">
                     Esta política de privacidade está em conformidade com as melhores práticas de proteção de dados e 
                     transparência. Comprometemo-nos a manter você informado sobre como seus dados são tratados e a 
-                    respeitar sua privacidade em todas as interações com o aplicativo UCA.
+                    respeitar sua privacidade em todas as interações com o aplicativo "UCA - Pergaminhos".
                   </p>
                 </div>
               </div>
