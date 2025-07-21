@@ -44,9 +44,12 @@ export default function LaunchPage() {
           Eu conseguirei!
         </Button>
 
-        <div className="mt-6 text-sm">
+        <div className="mt-6 text-sm flex justify-center space-x-4">
           <Link href="/privacy-policy" className="text-white hover:underline">
             Política de Privacidade
+          </Link>
+          <Link href="/terms-of-use" className="text-white hover:underline">
+            Termos de Uso
           </Link>
         </div>
       </div>

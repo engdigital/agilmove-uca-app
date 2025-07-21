@@ -122,26 +122,7 @@ export function AgeVerificationModal({ isOpen, onVerified }: AgeVerificationModa
             {isValid ? 'Continuar' : 'Digite seu ano de nascimento'}
           </Button>
 
-          <div className="text-center">
-            <p className="text-xs text-gray-500">
-              Ao continuar, você aceita nossos{' '}
-              <button 
-                type="button"
-                onClick={() => handleLinkClick('/terms-of-use')}
-                className="text-blue-600 underline hover:text-blue-800 cursor-pointer bg-transparent border-none p-0"
-              >
-                Termos de Uso
-              </button>{' '}
-              e{' '}
-              <button 
-                type="button"
-                onClick={() => handleLinkClick('/privacy-policy')}
-                className="text-blue-600 underline hover:text-blue-800 cursor-pointer bg-transparent border-none p-0"
-              >
-                Política de Privacidade
-              </button>
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
