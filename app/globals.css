@@ -2,25 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Touch scrolling improvements */
-.touch-scroll {
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  overflow-y: auto;
-}
-
-/* Fix for touch devices */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Scroll containers */
-.scroll-container {
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: auto;
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
