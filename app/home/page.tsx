@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress"
 import { Award, RotateCcw, Flame, BookOpen, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
 
 import { db } from "@/lib/db"

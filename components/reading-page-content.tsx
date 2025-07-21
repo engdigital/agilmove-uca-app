@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Check, ArrowLeft, Volume2, VolumeX } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
@@ -23,6 +23,7 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
   const router = useRouter()
   const { toast } = useToast()
   const [agreedToTerms, setAgreedToTerms] = useState(false)
+  const [isConfirming, setIsConfirming] = useState(false)
   
   // Hook para tratar o botão voltar do Android
   useAndroidBackHandler()
@@ -51,6 +52,9 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
   const hasCompleted30Days = currentUserScrollProgressForDisplay.completedDays >= 30
 
   const confirmReading = useCallback(async () => {
+    if (isConfirming) return // Evitar chamadas múltiplas
+    
+    setIsConfirming(true)
     const now = new Date()
     const readingTimestamp = now.getTime()
     const readingDay = getReadingDay(readingTimestamp)
@@ -84,28 +88,33 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
       // Verificar se o pergaminho atual foi concluído (30 dias) e avançar para o próximo
       if (newCompletedDays >= 30 && currentScrollId < staticScrolls.length) {
         await db.userSettings.update("settings", { currentScrollId: currentScrollId + 1 })
+        console.log("Pergaminho concluído! Mostrando toast...")
         toast({
-          title: `Pergaminho ${currentScrollId} Concluído!`,
+          title: `🎉 Pergaminho ${currentScrollId} Concluído!`,
           description: `Parabéns! Você completou 30 dias de leitura. Próximo: Pergaminho ${currentScrollId + 1}.`,
         })
       } else {
+        console.log("Leitura confirmada! Mostrando toast...", { period, title: "Leitura Confirmada!" })
         toast({
-          title: "Leitura Confirmada!",
-          description: `Sua leitura da ${period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"} foi registrada.`,
+          title: "✅ Leitura Confirmada!",
+          description: `Sua leitura da ${period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"} foi registrada com sucesso.`,
         })
       }
 
-      // Voltar para a página inicial
-      router.push("/home")
+      // Aguardar mais tempo para garantir que o toast seja exibido
+      setTimeout(() => {
+        router.push("/home")
+      }, 2500)
     } catch (error) {
       console.error("Erro ao confirmar leitura:", error)
+      setIsConfirming(false)
       toast({
         title: "Erro",
         description: "Não foi possível confirmar a leitura. Tente novamente.",
         variant: "destructive",
       })
     }
-  }, [currentScrollId, router, toast])
+  }, [currentScrollId, router, toast, isConfirming])
 
   const readingsForCurrentScroll = allReadings?.filter((r) => r.scrollId === currentScrollId) || []
   const todayKey = formatDateToKey(new Date())
@@ -275,11 +284,20 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
 
               <Button
                 onClick={confirmReading}
-                disabled={!canConfirmReading}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+                disabled={!canConfirmReading || isConfirming}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white disabled:opacity-50"
               >
-                <Check className="w-4 h-4 mr-2" />
-                Confirmar Leitura da {currentPeriod === "morning" ? "Manhã" : currentPeriod === "afternoon" ? "Tarde" : "Noite"}
+                {isConfirming ? (
+                  <>
+                    <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-4 h-4 mr-2" />
+                    Confirmar Leitura da {currentPeriod === "morning" ? "Manhã" : currentPeriod === "afternoon" ? "Tarde" : "Noite"}
+                  </>
+                )}
               </Button>
 
               {hasCurrentPeriodReading && (

@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Calendar, Bell, ArrowLeft, Check, X, Sun, Moon, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 import { db, type ReadingEntry, type UserSettings } from "@/lib/db"
 import { useLiveQuery } from "dexie-react-hooks"
