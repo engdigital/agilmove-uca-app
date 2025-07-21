@@ -267,9 +267,14 @@ export default function HomePage() {
         )}
         <div className="p-4 text-center text-gray-500 text-sm space-y-1 pb-10">
           <p>Versão do App: {appVersion}</p>
-          <Link href="/privacy-policy" className="text-gray-500 hover:underline">
-            Política de Privacidade
-          </Link>
+          <div className="flex justify-center gap-4">
+            <Link href="/privacy-policy" className="text-gray-500 hover:underline">
+              Política de Privacidade
+            </Link>
+            <Link href="/terms-of-use" className="text-gray-500 hover:underline">
+              Termos de Uso
+            </Link>
+          </div>
         </div>
       </div>
     </div>
