@@ -17,7 +17,9 @@ export const formatDateToDisplay = (date: Date): string => {
     month: "long",
     year: "numeric",
   }
-  return date.toLocaleDateString("pt-BR", options)
+  const formatted = date.toLocaleDateString("pt-BR", options)
+  // Remove "-feira" dos nomes dos dias da semana para economizar espaço
+  return formatted.replace(/-feira/g, "")
 }
 
 // Modificar a função getPeriod para retornar strings em português
