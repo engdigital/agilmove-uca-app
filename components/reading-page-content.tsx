@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
+import { SecureReadingService } from "@/lib/secure-reading-service"
 import { db } from "@/lib/db"
 import { useLiveQuery } from "dexie-react-hooks"
 import { staticScrolls } from "@/lib/scrolls"
@@ -57,28 +58,26 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
     setIsConfirming(true)
     const now = new Date()
     const readingTimestamp = now.getTime()
-    const readingDay = getReadingDay(readingTimestamp)
-    const readingDayKey = formatDateToKey(readingDay)
-    const currentHour = now.getHours()
-    const period = getPeriod(currentHour)
 
     try {
-      // Criar um ID composto para a entrada de leitura
-      const readingId = `${currentScrollId}-${readingDayKey}-${period}`
+      // Usar o serviço seguro para registrar a leitura
+      const result = await SecureReadingService.recordSecureReading(currentScrollId, readingTimestamp)
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Falha ao registrar leitura segura')
+      }
 
-      // Adicionar ou atualizar a entrada de leitura
-      await db.readings.put({
-        id: readingId,
-        scrollId: currentScrollId,
-        dateKey: readingDayKey,
-        period: period,
-        timestamp: readingTimestamp,
-      })
+      // Exibir avisos de segurança se houver
+      if (result.warnings && result.warnings.length > 0) {
+        console.warn('Avisos de segurança:', result.warnings)
+        // Em produção, você pode decidir se quer mostrar esses avisos ao usuário
+      }
 
       // Recalcular completedDays e lastReadingDate para o scroll atual
       const updatedReadingsForScroll = await db.readings.where({ scrollId: currentScrollId }).toArray()
       const newCompletedDays = calculateCompletedDays(updatedReadingsForScroll, currentScrollId)
-      const newLastReadingDate = readingDayKey
+      const readingDay = getReadingDay(readingTimestamp)
+      const newLastReadingDate = formatDateToKey(readingDay)
 
       await db.scrollProgress.update(currentScrollId, {
         completedDays: newCompletedDays,
@@ -94,10 +93,20 @@ export default function ReadingPageContent({ scrollId }: ReadingPageContentProps
           description: `Parabéns! Você completou 30 dias de leitura. Próximo: Pergaminho ${currentScrollId + 1}.`,
         })
       } else {
+        const period = result.reading?.period
+        const periodText = period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"
+        
         console.log("Leitura confirmada! Mostrando toast...", { period, title: "Leitura Confirmada!" })
+        
+        // Mostrar informações de segurança no toast se houver problemas
+        let description = `Sua leitura da ${periodText} foi registrada com sucesso.`
+        if (result.trustScore && result.trustScore < 80) {
+          description += ` (Score de confiança: ${result.trustScore}%)`
+        }
+        
         toast({
           title: "✅ Leitura Confirmada!",
-          description: `Sua leitura da ${period === "morning" ? "manhã" : period === "afternoon" ? "tarde" : "noite"} foi registrada com sucesso.`,
+          description,
         })
       }
 

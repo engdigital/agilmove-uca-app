@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { 
   Shield, 
   AlertTriangle, 
@@ -17,7 +18,9 @@ import {
   Lock, 
   Bell, 
   RefreshCw, 
-  Zap 
+  Zap,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -71,6 +74,7 @@ interface SecurityMetrics {
 }
 
 export function SecurityDashboard() {
+  const router = useRouter()
   const { isSecure, cspViolations, lastSecurityCheck, performSecurityCheck } = useSecurityContext()
   const { getErrorLogs } = useErrorLogs()
   const [metrics, setMetrics] = useState<SecurityMetrics | null>(null)
@@ -327,6 +331,62 @@ export function SecurityDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Card de Leituras Seguras */}
+      <Card className="border-blue-200 bg-blue-50/50">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <BookOpen className="h-5 w-5 text-blue-600" />
+              <span>Segurança das Leituras</span>
+            </div>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => router.push('/security-reading')}
+              className="text-blue-600 border-blue-300 hover:bg-blue-100"
+            >
+              Ver Dashboard
+              <ExternalLink className="h-4 w-4 ml-2" />
+            </Button>
+          </CardTitle>
+          <CardDescription>
+            Monitore a integridade e segurança das leituras dos pergaminhos
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Proteção contra manipulação de horário</span>
+              <Badge variant="default" className="bg-green-100 text-green-800">
+                <CheckCircle className="h-3 w-3 mr-1" />
+                Ativo
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Validação de comportamento</span>
+              <Badge variant="default" className="bg-green-100 text-green-800">
+                <Shield className="h-3 w-3 mr-1" />
+                Ativo
+              </Badge>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Cadeia de integridade (blockchain-like)</span>
+              <Badge variant="default" className="bg-green-100 text-green-800">
+                <Lock className="h-3 w-3 mr-1" />
+                Ativo
+              </Badge>
+            </div>
+            <div className="mt-4 p-3 bg-blue-100 rounded-lg">
+              <p className="text-xs text-blue-800">
+                <Shield className="h-4 w-4 inline mr-1" />
+                <strong>Sistema Offline:</strong> Todas as validações funcionam sem internet, 
+                garantindo segurança mesmo quando o dispositivo está offline.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Tabs Principais */}
       <Tabs defaultValue="checks" className="space-y-4">
