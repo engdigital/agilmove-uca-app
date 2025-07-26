@@ -51,11 +51,11 @@ export default function PrivacyPolicyPage() {
                     O aplicativo "UCA - Pergaminhos" foi projetado para funcionar completamente offline e <strong>não coleta nem armazena seus dados
                     pessoais em servidores externos</strong>. Todas as informações relacionadas ao seu progresso de leitura,
                     configurações de notificação e histórico de leituras são armazenadas <strong>exclusivamente no seu dispositivo
-                    local</strong> (utilizando o IndexedDB do navegador e localStorage para configurações).
+                    local</strong>.
                   </p>
 
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-3">📱 Dados Armazenados Localmente (Local Storage/IndexedDB):</h4>
+                    <h4 className="font-semibold text-gray-800 mb-3">📱 Dados Armazenados Localmente:</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start">
                         <span className="text-blue-500 mr-2">•</span>
@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
                   <div className="bg-yellow-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-yellow-800 mb-3">🍪 Cookies e Armazenamento Local:</h4>
                     <p className="text-yellow-700 text-sm">
-                      O aplicativo utiliza apenas cookies técnicos essenciais e storage local (localStorage/IndexedDB) para funcionar corretamente. 
+                      O aplicativo utiliza apenas cookies técnicos essenciais e storage local para funcionar corretamente. 
                       Não utilizamos cookies de rastreamento ou publicidade.
                     </p>
                   </div>
@@ -370,10 +370,6 @@ export default function PrivacyPolicyPage() {
                         app-uca@mandara.com.br
                       </a>
                     </div>
-                    <div className="bg-green-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-green-800 mb-2">🛠️ Suporte Técnico</h4>
-                      <p className="text-green-700 text-sm">Disponível através do menu do aplicativo</p>
-                    </div>
                     <div className="bg-purple-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-purple-800 mb-2">⏱️ Tempo de Resposta</h4>
                       <p className="text-purple-700 text-sm">Respondemos a todas as solicitações em até 48 horas úteis</p>
@@ -408,10 +404,10 @@ export default function PrivacyPolicyPage() {
               {/* Footer */}
               <div className="text-center bg-gray-100 p-6 rounded-lg">
                 <p className="text-sm text-gray-600 font-semibold">
-                  📅 Última atualização: 18 de Julho de 2025
+                  📅 Última atualização: 26 de Julho de 2025
                 </p>
                 <p className="text-xs text-gray-500 mt-2">
-                  Versão 1.0 • Vigência imediata
+                  Versão 2.0 • Vigência imediata
                 </p>
               </div>
             </div>

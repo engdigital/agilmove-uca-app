@@ -13,28 +13,28 @@ import { OrientationLock } from "@/components/orientation-lock"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "UCA - Pergaminhos",
-  description: "Aplicativo para acompanhar sua jornada de leitura dos pergaminhos UCA",
+  title: "AgilMove Pergaminhos UCA",
+  description: "Aplicativo para acompanhar sua jornada de leitura dos pergaminhos",
   generator: 'Next.js',
   applicationName: 'UCA - Pergaminhos',
   referrer: 'origin-when-cross-origin',
   keywords: ['UCA', 'pergaminhos', 'leitura', 'agilmove', 'desenvolvimento pessoal'],
   authors: [{ name: 'AgilMove' }],
-  creator: 'AgilMove',
+  creator: 'Marcus Mandara',
   publisher: 'AgilMove',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://uca.agilmove.com'),
+  metadataBase: new URL('https://agilmove.com.br/uca-app/'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'UCA - Pergaminhos',
-    description: 'Aplicativo para acompanhar sua jornada de leitura dos pergaminhos UCA',
-    url: 'https://uca.agilmove.com',
+    title: 'AgilMove Pergaminhos UCA',
+    description: 'Aplicativo para acompanhar sua jornada de leitura dos pergaminhos',
+    url: 'https://agilmove.com.br/uca-app/',
     siteName: 'UCA - Pergaminhos',
     locale: 'pt_BR',
     type: 'website',
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'AgilMove UCA',
-    description: 'Aplicativo para acompanhar sua jornada de leitura dos pergaminhos UCA',
+    title: 'AgilMove Pergaminhos UCA',
+    description: 'Aplicativo para acompanhar sua jornada de leitura dos pergaminhos',
     images: ['/icon-512x512.png'],
   },
   manifest: '/manifest.json',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     },
   },
   appleWebApp: {
-    title: 'AgilMove UCA',
+    title: 'AgilMove Pergaminhos UCA',
     statusBarStyle: 'default',
     capable: true,
     startupImage: [

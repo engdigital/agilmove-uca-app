@@ -39,12 +39,12 @@ export default function ReadingGuidePage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-blue-500" />
-                Períodos de Confirmação de Leitura
+                Períodos de Leitura
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-700 text-sm mb-4">
-                O app considera uma confirmação de leitura válida baseada no horário em que você confirma:
+                O app considera uma leitura válida baseada no horário em que você confirma:
               </p>
               
               <div className="space-y-3">
@@ -57,7 +57,7 @@ export default function ReadingGuidePage() {
                     Das <strong>04h00 às 11h59</strong>
                   </p>
                   <p className="text-xs text-orange-500 mt-1">
-                    Qualquer confirmação neste horário será registrada como "leitura da manhã"
+                    Qualquer confirmação de leitura ocorrida neste intervalo de horário será registrada como "leitura da manhã"
                   </p>
                 </div>
 
@@ -70,7 +70,7 @@ export default function ReadingGuidePage() {
                     Das <strong>12h00 às 18h59</strong>
                   </p>
                   <p className="text-xs text-yellow-500 mt-1">
-                    Qualquer confirmação neste horário será registrada como "leitura da tarde"
+                    Qualquer confirmação de leitura ocorrida neste intervalo de horário será registrada como "leitura da tarde"
                   </p>
                 </div>
 
@@ -83,7 +83,7 @@ export default function ReadingGuidePage() {
                     Das <strong>19h00 às 03h59</strong> (do dia seguinte)
                   </p>
                   <p className="text-xs text-blue-500 mt-1">
-                    Qualquer confirmação neste horário será registrada como "leitura da noite"
+                    Qualquer confirmação de leitura ocorrida neste intervalo de horário será registrada como "leitura da noite"
                   </p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function ReadingGuidePage() {
                   <span className="font-medium text-green-700">Dia Completo</span>
                 </div>
                 <p className="text-sm text-green-600 mb-2">
-                  Um dia só é considerado <strong>completo</strong> quando você confirma a leitura nos 3 períodos:
+                  Um dia só é considerado <strong>completo</strong> quando você confirma a leitura de um determinado pergaminho nos 3 períodos:
                 </p>
                 <ul className="text-xs text-green-600 space-y-1 ml-4">
                   <li>✓ Manhã (04h00 - 11h59)</li>
@@ -147,7 +147,7 @@ export default function ReadingGuidePage() {
                 <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
                   <Volume2 className="w-5 h-5 text-blue-600" />
                   <VolumeX className="w-5 h-5 text-orange-600" />
-                  Forma Correta de Ler por Período
+                  Forma Correta de Ler de Acordo com o Período
                 </h4>
                 
                 <div className="space-y-3">
@@ -195,7 +195,7 @@ export default function ReadingGuidePage() {
                   <div>
                     <h4 className="font-medium text-gray-800 mb-1">Reflita sobre o Conteúdo</h4>
                     <p className="text-sm text-gray-600">
-                      Após ler, pense sobre como aplicar os ensinamentos em sua vida diária.
+                      Após ler, pense sobre como aplicar os ensinamentos em sua vida diária e como eles poderiam ter te ajudado nos resultados recentes que você obteve.
                     </p>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function ReadingGuidePage() {
                     <span className="text-xs font-bold text-indigo-600">3</span>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-800 mb-1">Confirme Apenas Após Ler</h4>
+                    <h4 className="font-medium text-gray-800 mb-1">Confirme Apenas Após a Leitura</h4>
                     <p className="text-sm text-gray-600">
                       Só confirme a leitura depois de realmente ter lido o pergaminho por completo.
                     </p>
@@ -219,7 +219,7 @@ export default function ReadingGuidePage() {
                   <div>
                     <h4 className="font-medium text-gray-800 mb-1">Mantenha a Consistência</h4>
                     <p className="text-sm text-gray-600">
-                      O poder está na repetição diária. Leia nos 3 períodos todos os dias por 30 dias.
+                      O poder está na repetição diária. Leia nos 3 períodos todos os dias por 30 dias consecutivos.
                     </p>
                   </div>
                 </div>
@@ -238,15 +238,14 @@ export default function ReadingGuidePage() {
             <CardContent>
               <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border border-yellow-200">
                 <p className="text-sm text-gray-700 mb-3">
-                  <strong>Objetivo:</strong> Completar 30 dias de leitura completos (manhã, tarde e noite) 
+                  <strong>Objetivo:</strong> Completar 30 dias consecutivos de leitura completos (manhã, tarde e noite) 
                   para cada pergaminho.
                 </p>
                 <p className="text-sm text-gray-600 mb-3">
-                  Esta disciplina cria um hábito poderoso e permite que os ensinamentos se fixem 
-                  profundamente em sua mente e coração.
+                  Esta disciplina cria um hábito poderoso e possibilita melhorar muito seus resultados.
                 </p>
                 <p className="text-xs text-yellow-700 font-medium">
-                  🏆 Quando completar todos os 10 pergaminhos, você terá desenvolvido uma transformação real!
+                  🏆 Quando completar todos os 10 pergaminhos, você terá desenvolvido uma transformação real na sua vida! Fique a vontade para recomeçar!
                 </p>
               </div>
             </CardContent>

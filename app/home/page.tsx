@@ -96,12 +96,12 @@ export default function HomePage() {
   const lastReadingDisplay = useMemo(() => {
     return currentUserScrollProgress?.lastReadingDate
       ? formatDateToDisplay(
-          new Date(
-            Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(0, 4)), // Ano
-            Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(5, 7)) - 1, // Mês (0-indexado)
-            Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(8, 10)), // Dia
-          ),
-        )
+        new Date(
+          Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(0, 4)), // Ano
+          Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(5, 7)) - 1, // Mês (0-indexado)
+          Number.parseInt(currentUserScrollProgress.lastReadingDate.substring(8, 10)), // Dia
+        ),
+      )
       : "não iniciada"
   }, [currentUserScrollProgress?.lastReadingDate])
 
@@ -174,7 +174,7 @@ export default function HomePage() {
           </Card>
 
           {/* Link para o guia de leitura */}
-          <Card 
+          <Card
             className="mb-4 cursor-pointer hover:shadow-md transition-all duration-200 hover:scale-[1.02] bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200"
             onClick={() => router.push("/reading-guide")}
           >
@@ -202,12 +202,12 @@ export default function HomePage() {
             }
             const lastReadingDisplayForScroll = scrollUserData?.lastReadingDate
               ? formatDateToDisplay(
-                  new Date(
-                    Number.parseInt(scrollUserData.lastReadingDate.substring(0, 4)),
-                    Number.parseInt(scrollUserData.lastReadingDate.substring(5, 7)) - 1,
-                    Number.parseInt(scrollUserData.lastReadingDate.substring(8, 10)),
-                  ),
-                )
+                new Date(
+                  Number.parseInt(scrollUserData.lastReadingDate.substring(0, 4)),
+                  Number.parseInt(scrollUserData.lastReadingDate.substring(5, 7)) - 1,
+                  Number.parseInt(scrollUserData.lastReadingDate.substring(8, 10)),
+                ),
+              )
               : "não iniciada"
             const scrollCompletedDays = scrollUserData?.completedDays || 0
             const scrollProgressValue = (scrollCompletedDays / 30) * 100
@@ -263,7 +263,6 @@ export default function HomePage() {
           </div>
         )}
         <div className="p-4 text-center text-gray-500 text-sm space-y-1 pb-10">
-          <p>Versão do App: {appVersion}</p>
           <div className="flex justify-center gap-4">
             <Link href="/privacy-policy" className="text-gray-500 hover:underline">
               Política de Privacidade
@@ -271,6 +270,7 @@ export default function HomePage() {
             <Link href="/terms-of-use" className="text-gray-500 hover:underline">
               Termos de Uso
             </Link>
+            <p>Versão do App: {appVersion}</p>
           </div>
         </div>
       </div>

@@ -431,10 +431,10 @@ export default function TermsOfUsePage() {
               <div className="text-center bg-gray-100 p-6 rounded-lg">
                 <div className="space-y-2">
                   <p className="text-sm text-gray-600 font-semibold">
-                    📅 <strong>Última atualização:</strong> 19 de Julho de 2025
+                    📅 <strong>Última atualização:</strong> 26 de Julho de 2025
                   </p>
                   <p className="text-xs text-gray-500">
-                    <strong>Versão:</strong> 1.0
+                    <strong>Versão:</strong> 2.0
                   </p>
                   <p className="text-xs text-gray-500">
                     <strong>Vigência:</strong> Estes termos entram em vigor imediatamente
