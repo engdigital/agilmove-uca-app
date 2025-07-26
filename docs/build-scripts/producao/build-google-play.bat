@@ -3,19 +3,19 @@ setlocal enabledelayedexpansion
 
 REM ========================================
 REM BUILD COMPLETO PARA GOOGLE PLAY STORE
-REM AgilMove UCA App - Versao 1.0.4
+REM AgilMove UCA App - Versao 1.0.5
 REM Com Ofuscacao R8/ProGuard Habilitada
 REM ========================================
 
 echo.
 echo ==========================================
-echo BUILD PARA GOOGLE PLAY STORE - v1.0.4
+echo BUILD PARA GOOGLE PLAY STORE - v1.0.5
 echo Com Ofuscacao de Codigo (R8/ProGuard)
 echo ==========================================
 echo.
 
 REM Definir variaveis
-set VERSION=v1.0.4
+set VERSION=v1.0.5
 set PROJECT_ROOT=%~dp0..\..\..
 set BUILD_DIR=%~dp0%VERSION%
 set APK_SOURCE=%PROJECT_ROOT%\android\app\build\outputs\apk\release
