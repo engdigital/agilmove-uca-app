@@ -18,9 +18,9 @@ export default function PrivacyPolicyPage() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => router.back()} // Volta para a página anterior
+            onClick={() => router.push("/home")}
             className="mr-4"
-            aria-label="Voltar"
+            aria-label="Voltar para Home"
           >
             <ArrowLeft className="w-4 h-4" />
           </Button>

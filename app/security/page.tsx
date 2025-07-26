@@ -19,9 +19,9 @@ export default function SecurityPage() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => router.back()}
+            onClick={() => router.push("/home")}
             className="mr-4"
-            aria-label="Voltar"
+            aria-label="Voltar para Home"
           >
             <ArrowLeft className="w-4 h-4" />
           </Button>
