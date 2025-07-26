@@ -184,10 +184,7 @@ export default function HomePage() {
                   <BookOpen className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-blue-900 mb-1">Entenda como ler os pergaminhos</h3>
-                  <p className="text-sm text-blue-600">
-                    Aprenda as regras de confirmação, contagem de dias e como ler corretamente
-                  </p>
+                  <h3 className="font-bold text-blue-900">Entenda como ler os pergaminhos</h3>
                 </div>
                 <ArrowLeft className="w-5 h-5 text-blue-500 transform rotate-180" />
               </div>
