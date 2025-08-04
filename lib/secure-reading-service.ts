@@ -7,79 +7,107 @@ import {
   type SecureTimestamp,
   type TimestampValidation 
 } from './secure-time';
+import { 
+  MonotonicTimeValidator,
+  type MonotonicValidation,
+  type PeriodValidation 
+} from './monotonic-time-validator';
 import { formatDateToKey, getReadingDay, getPeriod } from './app-utils';
 
 export interface SecureReadingResult {
   success: boolean;
   reading?: ReadingEntry;
   validation?: TimestampValidation;
+  monotonicValidation?: MonotonicValidation;
+  periodValidation?: PeriodValidation;
   trustScore?: number;
+  overallRiskScore?: number;
   warnings?: string[];
   error?: string;
 }
 
 export class SecureReadingService {
   /**
-   * Registra uma leitura de forma segura com validações de tempo
+   * Registra uma leitura de forma segura com validações de tempo monotônico
    */
   static async recordSecureReading(
     scrollId: number,
     userTimestamp?: number
   ): Promise<SecureReadingResult> {
     try {
-      // Usar timestamp atual se não fornecido
-      const baseTimestamp = userTimestamp || Date.now();
+      // 1. VALIDAÇÃO MONOTÔNICA (principal anti-trapaça)
+      const completeValidation = MonotonicTimeValidator.validateCompleteReading(scrollId);
       
-      // Gerar timestamp seguro
+      if (!completeValidation.canRead) {
+        return {
+          success: false,
+          monotonicValidation: completeValidation.timeValidation,
+          periodValidation: completeValidation.periodValidation,
+          overallRiskScore: completeValidation.overallRiskScore,
+          error: completeValidation.timeValidation.isValid 
+            ? completeValidation.periodValidation.reason 
+            : completeValidation.timeValidation.reason,
+          warnings: [
+            ...completeValidation.timeValidation.warnings,
+            completeValidation.periodValidation.reason
+          ].filter(Boolean)
+        };
+      }
+
+      // 2. Se passou na validação monotônica, usar timestamp atual confiável
+      const baseTimestamp = Date.now();
+      
+      // 3. Gerar timestamp seguro (para compatibilidade com sistema existente)
       const secureTimestamp = SecureTimeService.generateSecureTimestamp();
       
-      // Calcular dados da leitura
+      // 4. Calcular dados da leitura
       const readingDay = getReadingDay(baseTimestamp);
       const readingDayKey = formatDateToKey(readingDay);
       const period = getPeriod(new Date(baseTimestamp).getHours());
       
-      // Obter leituras recentes para validação de comportamento
+      // 5. Validação comportamental (sistema antigo como camada adicional)
       const recentReadings = await this.getRecentReadings(scrollId, 10);
-      
-      // Validar padrão de comportamento
       const validation = BehaviorValidator.validateReadingPattern(
         secureTimestamp.timestamp,
         recentReadings.map(r => ({ timestamp: r.timestamp, period: r.period }))
       );
       
-      // Calcular score de confiança
+      // 6. Calcular score de confiança
       const allReadings = await db.readings.where({ scrollId }).toArray();
       const trustScore = BehaviorValidator.calculateTrustScore(allReadings);
       
-      // Gerar dados sequenciais para blockchain-like
+      // 7. Gerar dados sequenciais para blockchain-like
       const sequentialData = SequenceService.generateSequentialReading(scrollId, secureTimestamp);
       
-      // Criar ID composto para a entrada de leitura
+      // 8. Criar ID composto para a entrada de leitura
       const readingId = `${scrollId}-${readingDayKey}-${period}`;
       
-      // Verificar se já existe leitura para este período
+      // 9. Verificar se já existe leitura para este período
       const existingReading = await db.readings.get(readingId);
       
       const warnings: string[] = [];
       
-      // Adicionar avisos baseados na validação
+      // 10. Adicionar avisos baseados na validação comportamental (backup)
       if (!validation.isValid) {
-        warnings.push(`Padrão suspeito detectado: ${validation.issues.join(', ')}`);
+        warnings.push(`Padrão comportamental suspeito: ${validation.issues.join(', ')}`);
       }
       
-      if (validation.riskScore > 50) {
-        warnings.push(`Alto risco de manipulação (${validation.riskScore}%)`);
+      if (validation.riskScore > 30) {
+        warnings.push(`Score comportamental de risco: ${validation.riskScore}%`);
       }
       
       if (trustScore < 70) {
-        warnings.push(`Score de confiança baixo (${trustScore}%)`);
+        warnings.push(`Score de confiança baseado em histórico: ${trustScore}%`);
       }
       
       if (existingReading) {
         warnings.push('Sobrescrevendo leitura existente para este período');
       }
+
+      // 11. Avisos do validador monotônico
+      warnings.push(...completeValidation.timeValidation.warnings);
       
-      // Criar entrada de leitura segura
+      // 12. Criar entrada de leitura segura
       const readingEntry: ReadingEntry = {
         id: readingId,
         scrollId,
@@ -93,22 +121,26 @@ export class SecureReadingService {
         validation,
         trustScore,
         deviceInfo: secureTimestamp.deviceInfo,
-        suspicious: !validation.isValid || validation.riskScore > 30
+        suspicious: !validation.isValid || validation.riskScore > 30 || completeValidation.overallRiskScore > 30
       };
       
-      // Salvar no banco de dados
+      // 13. Salvar no banco de dados
       await db.readings.put(readingEntry);
       
-      // Salvar cópia criptografada no localStorage para backup
+      // 14. Completar registro monotônico (salvar nova âncora)
+      MonotonicTimeValidator.completeReading(scrollId);
+      
+      // 15. Salvar cópia criptografada no localStorage para backup
       await this.saveEncryptedBackup(readingEntry);
       
-      // Log para auditoria (apenas em desenvolvimento)
-      if (process.env.NODE_ENV === 'development') {
+      // 16. Log para auditoria (apenas em desenvolvimento)
+      if (typeof window !== 'undefined' && window.location?.hostname === 'localhost') {
         console.log('Leitura segura registrada:', {
           scrollId,
           sequence: sequentialData.sequence,
           validation: validation.isValid,
           riskScore: validation.riskScore,
+          monotonicRisk: completeValidation.overallRiskScore,
           trustScore,
           warnings
         });
@@ -118,7 +150,10 @@ export class SecureReadingService {
         success: true,
         reading: readingEntry,
         validation,
+        monotonicValidation: completeValidation.timeValidation,
+        periodValidation: completeValidation.periodValidation,
         trustScore,
+        overallRiskScore: completeValidation.overallRiskScore,
         warnings: warnings.length > 0 ? warnings : undefined
       };
       
@@ -226,9 +261,9 @@ export class SecureReadingService {
       }
       
       // Validar integridade da cadeia
-      const readingsWithSequence = readings.filter(r => r.sequence && r.hash && r.secureTimestamp);
+      const readingsWithSequence = readings.filter((r: any) => r.sequence && r.hash && r.secureTimestamp);
       const chainIntegrity = SequenceService.validateChainIntegrity(
-        readingsWithSequence.map(r => ({
+        readingsWithSequence.map((r: any) => ({
           sequence: r.sequence!,
           scrollId: r.scrollId,
           hash: r.hash!,
@@ -273,26 +308,26 @@ export class SecureReadingService {
   }> {
     try {
       const allReadings = await db.readings.toArray();
-      const suspiciousCount = allReadings.filter(r => r.suspicious).length;
+      const suspiciousCount = allReadings.filter((r: any) => r.suspicious).length;
       
       const trustScores = allReadings
-        .filter(r => r.trustScore !== undefined)
-        .map(r => r.trustScore!);
+        .filter((r: any) => r.trustScore !== undefined)
+        .map((r: any) => r.trustScore!);
       
       const averageTrustScore = trustScores.length > 0 
-        ? trustScores.reduce((a, b) => a + b, 0) / trustScores.length 
+        ? trustScores.reduce((a: number, b: number) => a + b, 0) / trustScores.length 
         : 100;
       
       // Contar mudanças de dispositivo
       const devices = new Set(allReadings
-        .filter(r => r.deviceInfo)
-        .map(r => r.deviceInfo)
+        .filter((r: any) => r.deviceInfo)
+        .map((r: any) => r.deviceInfo)
       );
       
       // Validar integridade geral da cadeia
-      const readingsWithSequence = allReadings.filter(r => r.sequence && r.hash && r.secureTimestamp);
+      const readingsWithSequence = allReadings.filter((r: any) => r.sequence && r.hash && r.secureTimestamp);
       const chainIntegrity = SequenceService.validateChainIntegrity(
-        readingsWithSequence.map(r => ({
+        readingsWithSequence.map((r: any) => ({
           sequence: r.sequence!,
           scrollId: r.scrollId,
           hash: r.hash!,
